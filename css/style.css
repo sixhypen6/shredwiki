@@ -1,0 +1,1788 @@
+/* My name is claude, I will end everyone involved with this project if you ask me to "please fix text padding idk how to add padding" again.*/
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --font-body: 'TerminusWiki', 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+    --font-heading: 'JetBrains Mono', 'TerminusWiki', 'Consolas', monospace;
+    --font-ui: 'JetBrains Mono', 'TerminusWiki', 'Consolas', monospace;
+
+    /* ── Core palette ── */
+    --bg-body: #0a0a0f;
+    --bg-content: #0f0f15;
+    --bg-surface: #15151f;
+    --bg-navbar: #0c0c12;
+    --bg-footer: #08080c;
+
+    /* ── Borders ── */
+    --border-subtle: #2a2822;
+    --border-light: #2a2a3a;
+    --border-medium: #3a3a55;
+    --border-bright: #5a5250;
+
+    /* ── Typography ── */
+    --text-main: #e0dcd5;
+    --text-bright: #f0eef0;
+    --text-secondary: #b8b0a5;
+    --text-muted: #999084;
+
+    /* ── Links ── */
+    --link-color: #6868d4;
+    --link-hover: #9aceff;
+    --link-visited: #b594ff;
+
+    /* ── Accent colors ── */
+    --accent-blue: #6868d4;
+    --accent-green: #70e8b8;
+    --accent-red: #ff8080;
+    --accent-orange: #ffc56a;
+    --accent-cyan: #6ee2e2;
+    --accent-purple: #b594ff;
+
+    /* ── Callout backgrounds ── */
+    --bg-tip: #0b1a12;
+    --bg-important: #1a160b;
+    --bg-warning: #1a0c0c;
+    --bg-note: #0c121c;
+
+    /* ── Callout borders ── */
+    --border-tip: #1f8c64;
+    --border-important: #b26a00;
+    --border-warning: #a00000;
+    --border-note: #0045a3;
+
+    --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 14px;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+::selection {
+    background: rgba(125, 172, 255, 0.25);
+    color: var(--text-bright);
+}
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════ */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-navbar);
+    padding: 0.65rem 2rem;
+    border-bottom: 2px solid var(--accent-blue);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 10;
+    z-index: 100;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.nav-links > li > a {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0 0.7rem;
+    border-radius: 4px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    transition: color 0.15s var(--ease-out), background-color 0.15s var(--ease-out), border-color 0.15s var(--ease-out);
+}
+
+.nav-links > li > a:hover {
+    color: var(--text-bright);
+    background-color: rgba(0, 47, 129, 0.08);
+    border-color: var(--accent-blue);
+}
+
+.nav-links > li > a.active {
+    color: var(--accent-blue);
+    background-color: rgba(0, 47, 129, 0.1);
+    border-color: var(--accent-blue);
+}
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT AREA
+   ═══════════════════════════════════════════ */
+.wiki-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    padding: 2rem 2.5rem;
+    background-color: var(--bg-content);
+    border: 1px solid var(--border-light);
+    border-top: none;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.wiki-container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--text-bright);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    line-height: 1.35;
+}
+
+h1 {
+    font-size: 1.6rem;
+    border-bottom: 2px solid var(--border-medium);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.01em;
+}
+
+h2 {
+    font-size: 1.25rem;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 0.35rem;
+    margin-top: 2rem;
+    color: var(--accent-blue);
+}
+
+h3 {
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+    color: var(--text-bright);
+}
+
+h4 {
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+p {
+    margin-bottom: 0.9rem;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.12s var(--ease-out);
+}
+
+a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--link-visited);
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+    margin: 1.75rem 0;
+}
+
+ul, ol {
+    margin-bottom: 0.9rem;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.2rem;
+}
+
+code {
+    font-family: var(--font-body);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: var(--accent-cyan);
+}
+
+pre {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 3px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-main);
+}
+
+blockquote {
+    border-left: 3px solid var(--border-medium);
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    color: var(--text-secondary);
+    background-color: rgba(24, 26, 27, 0.02);
+    font-style: italic;
+}
+
+/* ═══════════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════════ */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.card {
+    background-color: var(--bg-surface);
+    padding: 1.15rem 1.25rem;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 16px rgba(125, 172, 255, 0.06);
+    transform: translateY(-1px);
+}
+
+.card h3 {
+    font-size: 0.95rem;
+    color: var(--accent-blue);
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+    border-bottom: none;
+}
+
+.card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+}
+
+.card a {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent-green);
+    margin-top: auto;
+}
+
+.card a:hover {
+    color: var(--text-bright);
+}
+
+/* ═══════════════════════════════════════════
+   CALLOUTS / ADMONITIONS
+   ═══════════════════════════════════════════ */
+.callout {
+    padding: 0.75rem 1rem;
+    margin: 1.25rem 0;
+    border-radius: 4px;
+    border-left: 3px solid transparent;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.callout strong {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 0.3rem;
+}
+
+.callout-tip {
+    background-color: var(--bg-tip);
+    border-left-color: var(--border-tip);
+}
+
+.callout-tip strong {
+    color: var(--accent-green);
+}
+
+.callout-important {
+    background-color: var(--bg-important);
+    border-left-color: var(--border-important);
+}
+
+.callout-important strong {
+    color: var(--accent-orange);
+}
+
+.callout-warning {
+    background-color: var(--bg-warning);
+    border-left-color: var(--border-warning);
+}
+
+.callout-warning strong {
+    color: var(--accent-red);
+}
+
+.callout-note {
+    background-color: var(--bg-note);
+    border-left-color: var(--border-note);
+}
+
+.callout-note strong {
+    color: var(--accent-blue);
+}
+
+/* ═══════════════════════════════════════════
+   TABLE OF CONTENTS — polished wiki style
+   ═══════════════════════════════════════════ */
+.toc-box {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-radius: 4px;
+    padding: 0;
+    display: inline-block;
+    min-width: 220px;
+    max-width: 420px;
+    margin: 0.75rem 0 1.5rem 0;
+    overflow: hidden;
+}
+
+.toc-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--accent-blue);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0;
+    background-color: rgba(125, 172, 255, 0.06);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.toc-box > ul {
+    padding: 0.6rem 1rem 0.75rem 1rem;
+    margin: 0;
+}
+
+.toc-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: toc-counter;
+}
+
+.toc-box > ul > li {
+    counter-increment: toc-counter;
+}
+
+.toc-box li {
+    margin: 0.15rem 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.toc-box a {
+    color: var(--link-color);
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.1rem 0;
+    transition: color 0.12s var(--ease-out);
+}
+
+.toc-box a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+/* ── Tree-line connectors for nested items ── */
+.toc-box ul ul {
+    padding-left: 0;
+    margin-top: 0.1rem;
+    margin-left: 0.45rem;
+    list-style: none;
+    border-left: none;
+}
+
+.toc-box > ul > li {
+    position: relative;
+}
+
+/* Parent li that contains a nested ul gets a vertical line */
+.toc-box li:has(> ul) {
+    position: relative;
+}
+
+.toc-box ul ul li {
+    font-size: 0.82rem;
+    margin: 0.1rem 0;
+    padding-left: 1.4rem;
+    position: relative;
+}
+
+/* Vertical trunk line running alongside nested items */
+.toc-box ul ul li::before {
+    content: "├";
+    position: absolute;
+    left: 0.15rem;
+    top: 0;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--border-bright);
+    user-select: none;
+}
+
+/* Last nested item gets the └ (╰) connector */
+.toc-box ul ul li:last-child::before {
+    content: "╰";
+}
+
+/* Vertical line connecting items — runs through parent li */
+.toc-box ul ul li::after {
+    content: "";
+    position: absolute;
+    left: calc(0.15rem + 0.35em);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 1px solid var(--border-light);
+}
+
+/* Hide the continuation line on the last item */
+.toc-box ul ul li:last-child::after {
+    display: none;
+}
+
+/* ═══════════════════════════════════════════
+   WIKI THUMBNAIL IMAGES
+   ═══════════════════════════════════════════ */
+.wiki-thumb {
+    margin-bottom: 1rem;
+    max-width: 300px;
+    width: 100%;
+}
+
+.thumb-right {
+    float: right;
+    margin-left: 1.5rem;
+}
+
+.thumb-left {
+    float: left;
+    margin-right: 1.5rem;
+}
+
+.thumb-inner {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    padding: 4px;
+    border-radius: 3px;
+}
+
+.wiki-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+}
+
+.thumb-caption {
+    padding: 5px 4px 2px;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ═══════════════════════════════════════════
+   WIKI VIDEO EMBEDS (lazy-loaded)
+   ═══════════════════════════════════════════ */
+.wiki-video {
+    margin: 1.25rem 0;
+    width: 100%;
+}
+
+.wiki-video .thumb-inner {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    padding: 4px;
+    border-radius: 3px;
+}
+
+.wiki-video video,
+.wiki-video .lazy-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    background-color: #000;
+}
+
+/* ═══════════════════════════════════════════
+   TABLES
+   ═══════════════════════════════════════════ */
+.wiki-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.88rem;
+    background-color: var(--bg-content);
+    border: 1px solid var(--border-medium);
+}
+
+.wiki-table th {
+    background-color: var(--bg-surface);
+    color: var(--accent-blue);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 12px;
+    border: 1px solid var(--border-medium);
+}
+
+.wiki-table td {
+    padding: 7px 12px;
+    border: 1px solid var(--border-light);
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+.wiki-table tr:nth-child(even) {
+    background-color: rgba(24, 26, 27, 0.02);
+}
+
+.wiki-table tr:hover {
+    background-color: rgba(0, 47, 129, 0.05);
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+footer {
+    background-color: var(--bg-footer);
+    text-align: center;
+    padding: 1.25rem 2rem;
+    margin-top: auto;
+    border-top: 2px solid var(--border-light);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+footer a {
+    color: var(--link-color);
+}
+
+footer strong {
+    font-family: var(--font-ui);
+    color: var(--text-secondary);
+}
+
+.credits-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.credit-category {
+    font-size: 0.78rem;
+}
+
+/* ═══════════════════════════════════════════
+   SEARCH
+   ═══════════════════════════════════════════ */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#wiki-search {
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    width: 200px;
+    height: 34px;
+    padding: 0 0.6rem;
+    border-radius: 3px;
+    border: 1px solid var(--border-medium);
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    transition: width 0.25s var(--ease-out), border-color 0.15s var(--ease-out), box-shadow 0.15s var(--ease-out);
+}
+
+#wiki-search:focus {
+    width: 320px;
+    border-color: var(--accent-blue);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 47, 129, 0.12);
+}
+
+#wiki-search::placeholder {
+    color: var(--text-muted);
+}
+
+.search-results-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.search-item {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-light);
+    transition: background-color 0.1s var(--ease-out);
+}
+
+.search-item:last-child {
+    border-bottom: none;
+}
+
+.search-item:hover {
+    background: rgba(125, 172, 255, 0.06);
+}
+
+.search-item strong {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    color: var(--link-color);
+}
+
+.search-item span {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.search-item .wiki-categories {
+    margin-top: 6px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+    pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   INFOBOX SIDEBAR
+   ═══════════════════════════════════════════ */
+.infobox {
+    float: right;
+    width: 265px;
+    margin: 0 0 1.25rem 1.5rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    overflow: hidden;
+}
+
+.infobox-title {
+    background: linear-gradient(135deg, rgba(125, 172, 255, 0.12), rgba(176, 154, 255, 0.08));
+    color: var(--accent-blue);
+    text-align: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid var(--border-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.infobox-image {
+    padding: 5px;
+    text-align: center;
+    background-color: var(--bg-content);
+}
+
+.infobox-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+}
+
+.infobox-image-caption {
+    padding-top: 3px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.infobox table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.infobox th,
+.infobox td {
+    padding: 5px 10px;
+    border-top: 1px solid var(--border-light);
+    vertical-align: top;
+    text-align: left;
+    color: var(--text-main);
+    font-size: 0.8rem;
+}
+
+.infobox th {
+    width: 45%;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.75rem;
+    background-color: rgba(125, 172, 255, 0.04);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.infobox tr:hover {
+    background-color: rgba(125, 172, 255, 0.04);
+}
+
+/* ── Status badges ── */
+.status-badge {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.status-active {
+    background-color: rgba(90, 224, 176, 0.1);
+    color: var(--accent-green);
+    border: 1px solid rgba(90, 224, 176, 0.25);
+}
+
+.status-patched {
+    background-color: rgba(255, 123, 123, 0.1);
+    color: var(--accent-red);
+    border: 1px solid rgba(255, 123, 123, 0.25);
+}
+
+.status-countered {
+    background-color: rgba(255, 184, 77, 0.1);
+    color: var(--accent-orange);
+    border: 1px solid rgba(255, 184, 77, 0.25);
+}
+
+/* ═══════════════════════════════════════════
+   SECTION / ARTICLE CLEAR
+   ═══════════════════════════════════════════ */
+section, article {
+    clear: both;
+    overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INSERTABLE WIKI COMPONENTS
+   Drop these class names into your HTML for instant wiki styling.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Hatnote ──
+   Small italic note at the top of an article.
+   Usage: <div class="wiki-hatnote">This article is about X. For Y, see <a>Z</a>.</div>
+*/
+.wiki-hatnote {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--border-light);
+}
+
+/* ── Stub / WIP marker ──
+   Usage: <div class="wiki-stub">This article is a stub. You can help by expanding it.</div>
+*/
+.wiki-stub {
+    background-color: var(--bg-important);
+    border: 1px dashed var(--accent-orange);
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    margin: 1.25rem 0;
+    font-size: 0.82rem;
+    color: var(--accent-orange);
+    text-align: center;
+    font-style: italic;
+}
+
+.wiki-stub::before {
+    content: "STUB PAGE";
+    display: block;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+}
+
+/* ── Blockquote with attribution ──
+   Usage:
+   <figure class="wiki-quote">
+       <blockquote>Quote text here.</blockquote>
+       <figcaption>— Author, <cite>Source</cite></figcaption>
+   </figure>
+*/
+.wiki-quote {
+    margin: 1.25rem 0;
+    padding: 0;
+}
+
+.wiki-quote blockquote {
+    border-left: 3px solid var(--accent-purple);
+    background-color: rgba(176, 154, 255, 0.04);
+    padding: 0.75rem 1.1rem;
+    margin: 0;
+    font-style: italic;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    border-radius: 0 4px 4px 0;
+}
+
+.wiki-quote figcaption {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+    padding-left: 1.1rem;
+}
+
+/* ── Image gallery grid ──
+   Usage:
+   <div class="wiki-gallery">
+       <figure><img src="..."><figcaption>Caption</figcaption></figure>
+       <figure><img src="..."><figcaption>Caption</figcaption></figure>
+   </div>
+*/
+.wiki-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+}
+
+.wiki-gallery figure {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 3px;
+    padding: 4px;
+    margin: 0;
+    transition: border-color 0.15s var(--ease-out);
+}
+
+.wiki-gallery figure:hover {
+    border-color: var(--border-bright);
+}
+
+.wiki-gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+}
+
+.wiki-gallery figcaption {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    padding: 4px 4px 2px;
+    font-style: italic;
+    text-align: center;
+}
+
+/* ── Definition list ──
+   Usage:
+   <dl class="wiki-dl">
+       <dt>Term</dt>
+       <dd>Definition</dd>
+   </dl>
+*/
+.wiki-dl {
+    margin: 1rem 0;
+}
+
+.wiki-dl dt {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent-blue);
+    margin-top: 0.75rem;
+    margin-bottom: 0.15rem;
+}
+
+.wiki-dl dt::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--border-medium);
+    margin-top: 2px;
+}
+
+.wiki-dl dd {
+    margin-left: 1rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--border-light);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ── Category tags ──
+   Usage:
+   <div class="wiki-categories">
+       <span class="wiki-cat">Shredders</span>
+       <span class="wiki-cat">PvP</span>
+   </div>
+*/
+
+.wiki-categories::before {
+    content: "Categories:";
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+}
+
+.wiki-cat {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background-color: rgba(125, 172, 255, 0.06);
+    border: 1px solid var(--border-light);
+    color: var(--link-color);
+    cursor: default;
+    transition: background-color 0.12s var(--ease-out);
+}
+
+.wiki-cat:hover {
+    background-color: rgba(125, 172, 255, 0.12);
+}
+
+/* ── Breadcrumbs ──
+   Usage:
+   <nav class="wiki-breadcrumb">
+       <a href="/">Home</a> <a href="/pages/shredderhub.html">ShredderHub</a> <span>Armor Info</span>
+   </nav>
+*/
+.wiki-breadcrumb {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.wiki-breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.wiki-breadcrumb a:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+}
+
+.wiki-breadcrumb a::after {
+    content: "/";
+    color: var(--border-bright);
+    margin: 0 0.3rem;
+}
+
+.wiki-breadcrumb span {
+    color: var(--text-secondary);
+}
+
+/* ── "See also" / related articles box ──
+   Usage:
+   <div class="wiki-see-also">
+       <strong>See also</strong>
+       <ul><li><a href="...">Article</a></li></ul>
+   </div>
+*/
+.wiki-see-also {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    margin: 1.25rem 0;
+}
+
+.wiki-see-also strong {
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.wiki-see-also ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.wiki-see-also li {
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+}
+
+/* ── Keyboard shortcut / key badge ──
+   Usage: Press <kbd class="wiki-key">E</kbd> to activate.
+*/
+.wiki-key {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-bottom-width: 2px;
+    color: var(--text-bright);
+    box-shadow: 0 1px 0 var(--border-light);
+}
+
+/* ── Inline stat indicator ──
+   Usage: <span class="wiki-stat wiki-stat-high">High</span>
+*/
+.wiki-stat {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.wiki-stat-high {
+    color: var(--accent-green);
+    background-color: rgba(90, 224, 176, 0.08);
+}
+
+.wiki-stat-medium {
+    color: var(--accent-orange);
+    background-color: rgba(255, 184, 77, 0.08);
+}
+
+.wiki-stat-low {
+    color: var(--accent-red);
+    background-color: rgba(255, 123, 123, 0.08);
+}
+
+/* ── Article last-edited line ──
+   Usage: <div class="wiki-last-edited">Last edited on 19 May 2026 by platform2</div>
+*/
+.wiki-last-edited {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-align: right;
+    margin-top: 2rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-subtle);
+    font-style: italic;
+}
+
+/* ═══════════════════════════════════════════
+   PAGE BACKGROUND IMAGE
+   Visible overlay — in front of body bg,
+   behind text content
+   ═══════════════════════════════════════════ */
+.wiki-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('/assests/pagebackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Push all wiki-container children above the background overlay */
+.wiki-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ═══════════════════════════════════════════
+   SIDE TRIANGLES (decorative, full-height)
+   Base spans the entire left / right edge
+   ═══════════════════════════════════════════ */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    width: 35vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+}
+
+/* Left triangle — base on left edge, apex points right */
+body::before {
+    left: 0;
+    clip-path: polygon(0% 0%, 0% 100%, 45% 50%);
+    /* 45° gradient: base (left) = purple, tip (right) = near-black */
+    background: linear-gradient(90deg, #6868d4 0%, #0a0a0f 35%);
+}
+
+/* Right triangle — base on right edge, apex points left */
+body::after {
+    right: 0;
+    clip-path: polygon(100% 0%, 100% 100%, 55% 50%);
+    /* 45° gradient: tip (left) = near-black, base (right) = purple */
+    background: linear-gradient(90deg, #0a0a0f 65%, #6868d4 100%);
+}
+
+/* Ensure navbar & footer render above the triangles */
+.navbar {
+    z-index: 100;
+    position: sticky;
+}
+
+footer {
+    position: relative;
+    z-index: 10;
+}
+
+.wiki-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+    html {
+        font-size: 13px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.35rem;
+    }
+
+    .wiki-container {
+        margin: 0;
+        padding: 1.25rem 1rem;
+        border-left: none;
+        border-right: none;
+    }
+
+    .wiki-thumb,
+    .infobox {
+        float: none;
+        max-width: 100%;
+        width: 100%;
+        margin: 0 0 1rem 0;
+    }
+
+    .toc-box {
+        display: block;
+        max-width: 100%;
+    }
+
+    #wiki-search,
+    #wiki-search:focus {
+        width: 160px;
+    }
+
+    .wiki-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    /* Smaller triangles on mobile */
+    body::before,
+    body::after {
+        opacity: 0.20;
+    }
+
+    body::before {
+        clip-path: polygon(0% 0%, 0% 100%, 30% 50%);
+    }
+
+    body::after {
+        clip-path: polygon(100% 0%, 100% 100%, 70% 50%);
+    }
+}
+
+/* ═══════════════════════════════════════════
+   SCROLLBAR CUSTOMIZATION
+   ═══════════════════════════════════════════ */
+
+/* Firefox support */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-medium) var(--bg-body);
+}
+
+/* Webkit browser support (Chrome, Safari, Edge, Opera) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: 4px;
+    border: 2px solid var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* Specific scrollbar styling for search results box */
+.search-results-box::-webkit-scrollbar-track {
+    background: var(--bg-surface);
+}
+
+.search-results-box::-webkit-scrollbar-thumb {
+    border: 2px solid var(--bg-surface);
+}
+.credits-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Generous spacing between top coder and the bottom row */
+    font-family: sans-serif;
+    width: 100%;
+}
+
+/* Centered Main Coder Styling */
+.credit-category.central-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+}
+
+.central-feature .credit-member {
+    margin-left: 0; 
+}
+
+/* Flex row: Now centers the columns and keeps them tightly grouped */
+.credits-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Brings the columns to the center together */
+    align-items: flex-start;
+    gap: 60px; /* Adjust this number to make the gap wider or narrower */
+    flex-wrap: wrap; 
+}
+
+/* Base style for the side-by-side categories */
+.credits-row .credit-category {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    /* Removed flex: 1 so they don't stretch aggressively */
+    min-width: 200px; 
+}
+
+/* Member layout within columns */
+.credit-member {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.member-name {
+    font-weight: 500;
+}
+
+.credit-note {
+    color: #888888;
+    font-size: 0.85em;
+}
+/* The CSS class you will apply to the text */
+.wiki-glow-purple {
+  font-weight: bold;
+  color: #6868d4; /* A soft cream-lavender base text color */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+  /* Link the text to the new purple keyframe loop */
+  animation: purplePulse 3s ease-in-out infinite alternate;
+}
+
+/* The Keyframe Animation loop calibrated for purple/indigo */
+@keyframes purplePulse {
+  0% {
+    /* Baseline: Subtle, soft aura using your base color #6868d4 */
+    text-shadow: 
+      0 0 4px rgba(104, 104, 212, 0.5), 
+      0 0 8px rgba(104, 104, 212, 0.3);
+  }
+  50% {
+    /* Peak brightness: Flares out into brilliant bright lavenders and whites */
+    text-shadow:                  /* Pure white core */
+      0 0 7.5px #b3b3ff,                 /* Vibrant light purple */
+      0 0 15px #6868d4;                 /* Wide cast of your base indigo */
+    color: #8787d6; /* Brightens the text itself at the peak */
+  }
+  100% {
+    /* Deep state: Drops down into a darker, moody void-purple before looping */
+    text-shadow: 
+      0 0 4px rgba(74, 74, 184, 0.6), 
+      0 0 13px rgba(45, 45, 128, 0.5);
+  }
+}
+.wiki-title-shimmer {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  
+  /* Sets up a multi-layered metallic background skewed at an angle */
+  background: linear-gradient(120deg, #777 30%, #fff 50%, #777 70%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Loops the shimmer animation smoothly */
+  animation: shineLoop 4s linear infinite;
+}
+
+@keyframes shineLoop {
+  0% { background-position: 200% center; }
+  100% { background-position: 0% center; }
+}
+
+.wiki-stat-number {
+  font-family: 'Courier New', monospace; /* Gives a distinct data/stat feel */
+  font-size: 1.25em;
+  font-weight: 900;
+  
+  /* Creates a metallic vertical gradient background strictly inside the text */
+  background: linear-gradient(to bottom, #ffffff 30%, #b5bdc8 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Smooth transition for the hover effect */
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-block;
+}
+
+/* Micro-interaction: Pops out slightly when hovered */
+.wiki-stat-number:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+.wiki-ambient-reflection {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-block;
+  
+  /* 1. THE STATIONARY REFLECTION */
+  background: linear-gradient(
+    to bottom,
+    #b3b3ff 0%,    /* Bright top reflection */
+    #ffffff 5%,   /* White hot core highlight */
+    #6868d4 50%,   /* The sharp split using your color */
+    #4a4ab8 55%,   /* Deeper shadow underneath */
+    #6868d4 100%   /* Base color at the bottom */
+  );
+  
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* 2. THE PERMANENT AMBIENT GLOW */
+  /* This creates a rich, layered backdrop that stays perfectly still */
+  text-shadow: 
+    0 0 8px rgba(179, 179, 255, 0.5),  /* Light purple inner aura */
+    0 0 10px rgba(104, 104, 212, 0.3), /* Deep indigo middle wash */
+    0 0 20px rgba(104, 104, 212, 0.1); /* Soft outer background glow */
+    
+  /* Keeps the metallic core crisp and vibrant */
+  filter: brightness(1); 
+}
+.wiki-inline-gif {
+  /* Forces the GIF to perfectly match the height of your current font size */
+  height: 2em; 
+  width: auto;
+  
+  /* Aligns the icon beautifully with the middle of the text line */
+  vertical-align: middle;
+  
+  /* Adds a tiny gap so the text doesn't mash directly into the image */
+  margin-right: 4px;
+  margin-left: 4px;
+  
+  /* Optional: Keeps pixel art sharp if your GIF uses retro sprites */
+
+}
+.wiki-keyword-reveal {
+  color: #6868d4;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+
+.wiki-keyword-glow {
+  font-weight: 600; /* Slightly thicker than normal text */
+  color: #e6e6ff;   /* Soft lavender-white text so it pops against dark themes */
+  
+  /* A single, low-positioned shadow that acts as a floor underline glow */
+  text-shadow: 0 3px 6px rgba(104, 104, 212, 0.7);
+}
+
+/* ═══════════════════════════════════════════
+   HUB CATEGORY BOXES
+   Grouped card containers with transparent
+   background images for the ShredderHub page.
+   ═══════════════════════════════════════════ */
+
+.hub-category {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-medium);
+    border-radius: 6px;
+    padding: 1.75rem 1.5rem 1.5rem;
+    margin-bottom: 1.75rem;
+    background-color: rgba(15, 15, 21, 0.85);
+
+    /* Entrance animation */
+    animation: hubFadeIn 0.5s var(--ease-out) both;
+}
+
+.hub-category:nth-child(2) { animation-delay: 0.08s; }
+.hub-category:nth-child(3) { animation-delay: 0.16s; }
+.hub-category:nth-child(4) { animation-delay: 0.24s; }
+.hub-category:nth-child(5) { animation-delay: 0.32s; }
+
+@keyframes hubFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Semi-transparent background image ── */
+.hub-category::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--hub-bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+    transition: opacity 0.4s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+/* Subtle parallax-feel on hover */
+.hub-category:hover::before {
+    opacity: 0.14;
+    transform: scale(1.03);
+}
+
+/* Glow border on hover */
+.hub-category:hover {
+    border-color: var(--accent-blue);
+    box-shadow:
+        0 0 20px rgba(104, 104, 212, 0.08),
+        0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Push children above the background image */
+.hub-category > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Category header ── */
+.hub-category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.15rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--border-light);
+    background: linear-gradient(90deg,
+        rgba(104, 104, 212, 0.06) 0%,
+        transparent 100%);
+    margin: -1.75rem -1.5rem 1.25rem;
+    padding: 1rem 1.5rem 0.75rem;
+}
+
+.hub-category-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+    filter: saturate(0.8);
+}
+
+.hub-category-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* ── Card grid inside category ── */
+.hub-category-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+}
+
+/* Cards inside hub categories inherit existing .card styles
+   but get a slightly elevated look */
+.hub-category-cards .card {
+    background-color: rgba(21, 21, 31, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-color: var(--border-light);
+    transition:
+        border-color 0.2s var(--ease-out),
+        box-shadow 0.2s var(--ease-out),
+        transform 0.2s var(--ease-out),
+        background-color 0.2s var(--ease-out);
+}
+
+.hub-category-cards .card:hover {
+    background-color: rgba(21, 21, 31, 0.92);
+    border-color: var(--accent-blue);
+    box-shadow: 0 6px 20px rgba(104, 104, 212, 0.1);
+    transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .hub-category {
+        padding: 1.25rem 1rem 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .hub-category-header {
+        margin: -1.25rem -1rem 1rem;
+        padding: 0.75rem 1rem 0.6rem;
+    }
+
+    .hub-category-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hub-category-icon {
+        font-size: 1.1rem;
+    }
+
+    .hub-category-title {
+        font-size: 0.92rem;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   CARD BACKGROUND IMAGES
+   Add class="card card-bg" and set
+   style="--card-bg: url('...')" on any card
+   to show an image behind the card text.
+   ═══════════════════════════════════════════ */
+
+.card.card-bg {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* The background image layer */
+.card.card-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--card-bg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    transition: transform 0.4s var(--ease-out), opacity 0.4s var(--ease-out);
+}
+
+/* Dark overlay so text stays readable */
+.card.card-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 15, 0.55) 0%,
+        rgba(10, 10, 15, 0.78) 100%
+    );
+    z-index: 1;
+    transition: background 0.3s var(--ease-out);
+}
+
+/* Push card content above both layers */
+.card.card-bg > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover: image brightens and drifts slightly */
+.card.card-bg:hover::before {
+    transform: scale(1.06);
+}
+
+.card.card-bg:hover::after {
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 15, 0.4) 0%,
+        rgba(10, 10, 15, 0.7) 100%
+    );
+}
