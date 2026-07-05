@@ -18,9 +18,9 @@ function buildNav() {
         <nav class="navbar">
             <div class="logo"><h2 class="wiki-ambient-reflection">Plane Crazy Shredder and Tech wiki</h2></div>
             <ul class="nav-links">
-                ${link('/index.html', 'Home')}
-                ${link('/pages/shredderhub.html', 'ShredderHub')}
-                ${link('/pages/techmanifest.html', 'TechManifest')}
+                ${link('shredwiki/index.html', 'Home')}
+                ${link('shredwiki/pages/shredderhub.html', 'ShredderHub')}
+                ${link('shredwiki/pages/techmanifest.html', 'TechManifest')}
                 <div class="search-container">
                     <input type="text" id="wiki-search" placeholder="Search for TECH..." autocomplete="off">
                     <div id="wiki-results" class="search-results-box"></div>
