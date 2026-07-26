@@ -18,9 +18,9 @@ function buildNav() {
         <nav class="navbar">
             <div class="logo"><h2 class="wiki-ambient-reflection">Plane Crazy Shredder and Tech wiki</h2></div>
             <ul class="nav-links">
-                ${link('shredwiki/index.html', 'Home')}
-                ${link('shredwiki/pages/shredderhub.html', 'ShredderHub')}
-                ${link('shredwiki/pages/techmanifest.html', 'TechManifest')}
+                ${link('https://sixhypen6/shredwiki/index.html', 'Home')}
+                ${link('https://sixhypen6/shredwiki/pages/shredderhub.html', 'ShredderHub')}
+                ${link('https://sixhypen6/shredwiki/pages/techmanifest.html', 'TechManifest')}
                 <div class="search-container">
                     <input type="text" id="wiki-search" placeholder="Search for TECH..." autocomplete="off">
                     <div id="wiki-results" class="search-results-box"></div>
@@ -38,33 +38,25 @@ function buildFooter() {
     if (!el) return;
 
     el.innerHTML = `<div class="credits-container">
+    <!-- Main / Current Owner Section -->
     <div class="credit-category central-feature">
-        <strong><span class="wiki-title-shimmer">Repository Contributors:</span></strong>
+        <strong><span class="wiki-title-shimmer">Repository Owner:</span></strong>
         <div class="credit-member">
-            <span class="member-name">platform2 (759825779974209616)</span>
-            <small class="credit-note">Main coder, page writing, design.</small>
-        </div>
-        <div class="credit-member">
-            <span class="member-name">peacekeepe_r (850394478895300629)</span>
-            <small class="credit-note">Main writer, main design, minor coding.</small>
+            <span class="member-name">gup (1200432068115578992)</span>
         </div>
     </div>
 
-    <div class="credits-row">
+    <!-- Pre-Ownership Change Section (Spaced further apart) -->
+    <div class="credits-row" style="margin-top: 3.5rem; gap: 2rem;">
         <div class="credit-category">
-            <strong>Major Contributors:</strong>
+            <strong>Original Creator/Owner:</strong>
             <div class="credit-member">
-                <span class="member-name">kameon</span>
-                <small class="credit-note">Fully influenced the style of writing.</small>
-            </div>
-            <div class="credit-member">
-                <span class="member-name">IntegrativeGenesis</span>
-                <small class="credit-note">Provided history almost fully lost to time.</small>
+                <span class="member-name">platform2</span>
             </div>
         </div>
 
         <div class="credit-category">
-            <strong>Writers:</strong>
+            <strong>Writers (Pre Ownership Change):</strong>
             <div class="credit-member">
                 <span class="member-name">kameon</span>
                 <small class="credit-note">Writing, design assets, "beta testing" and major corrections.</small>
@@ -84,7 +76,7 @@ function buildFooter() {
         </div>
 
         <div class="credit-category">
-            <strong>Contributors:</strong>
+            <strong>Contributors (Pre Ownership Change):</strong>
             <div class="credit-member">
                 <span class="member-name">glitchedtm</span>
                 <small class="credit-note">Natural Selection.</small>
@@ -101,10 +93,12 @@ function buildFooter() {
     </div>
 </div>
 
-<hr>
-<p style="text-align: center;">Made for the <a href="https://discord.gg/89gEYNR7zd" target="_blank" rel="noopener noreferrer">Neo Shredder Group Discord</a></p>`;
+<hr style="margin-top: 3rem;">
+<p style="text-align: center;">
+    Originally made for the Neo Shredder Group, now for the 
+    <a href="https://discord.gg/VFFgyCzu8m" target="_blank" rel="noopener noreferrer">Exploiter Community</a>
+</p>`;
 }
-
 // ═══════════════════════════════════════════
 //  SEARCH
 // ═══════════════════════════════════════════
