@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shredder Optimisation | Plane Crazy Shredders Wiki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+
+    <div id="wiki-nav"></div>
+
+    <main class="wiki-container">
+        <h1>Shredder Optimisation</h1>
+
+        <div class="wiki-categories">
+            <span class="wiki-cat">Shredders</span>
+            <span class="wiki-cat">Mechanics</span>
+            <span class="wiki-cat">Performance</span>
+        </div>
+
+        <nav class="wiki-breadcrumb">
+            <a href="../../index.html">Home</a> &gt; <a href="../shredderhub.html">ShredderHub</a> &gt; <span>Optimisation</span>
+        </nav>
+
+        <p>
+            Optimising your shredder reduces physics lag, lowers overall block counts, and increases server stability—giving you faster rotation speeds and cleaner hits.
+        </p>
+
+        <nav class="toc-box">
+            <div class="toc-title">Contents</div>
+            <ul>
+                <li><a href="#structural-redundancy">1 Structural Redundancy Skeletons</a></li>
+                <li><a href="#text-blocks">2 Text Block Connections</a></li>
+                <li><a href="#compressors">3 Compressors vs. Angle Locks</a></li>
+                <li><a href="#zipper-locking">4 Zipper Locking Tech</a></li>
+                <li><a href="#clearance">5 Clearance & Collision Prevention</a></li>
+                <li><a href="#plus-one">6 +1 Compressor Configurations</a></li>
+            </ul>
+        </nav>
+
+        <!-- SECTION 1 -->
+        <section id="structural-redundancy">
+            <h2>Structural Redundancy Skeletons</h2>
+            <p>
+                Building an efficient frame is crucial for keeping node counts low while maintaining structural integrity.
+            </p>
+            <div class="wiki-img-group">
+                <figure>
+                    <img src="../../images/optimisation/unoptimized_skeleton.png" alt="Unoptimized Redundancy Skeleton">
+                    <figcaption>Unoptimized Redundancy Skeleton</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/optimisation/optimized_skeleton.png" alt="Optimized Redundancy Skeleton">
+                    <figcaption>Optimized Redundancy Skeleton</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section id="text-blocks">
+            <h2>Text Block Connections</h2>
+            <p>
+                Text Blocks are single flat blocks (3x3x1 / 1x3x3) used to join structural sections cleanly without introducing unnecessary block overhead.
+            </p>
+            <figure>
+                <img src="../../images/optimisation/text_weld_points.png" alt="3x3 Text Block Weld Points">
+                <figcaption>3x3 Text Block Weld Points</figcaption>
+            </figure>
+            <ul>
+                <li><strong>Weld Rules:</strong> On the flat face of a Text Block, the <strong>bottom-left</strong> and <strong>top-right</strong> corners do <em>not</em> weld to adjacent blocks. Keep this in mind during frame design to avoid accidental detachments.</li>
+            </ul>
+
+            <h3>How to Use Text Blocks for Connections</h3>
+            <figure>
+                <img src="../../images/optimisation/text_connection_setup.png" alt="Standard Text Connection Setup">
+                <figcaption>Standard Text Connection Setup</figcaption>
+            </figure>
+            <p>
+                Place the Text Block flat across two separate frame segments, ensuring the active weld points overlap both sections while avoiding the non-welding bottom-left and top-right corners.
+            </p>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section id="compressors">
+            <h2>Compressors vs. Angle Locks</h2>
+            <p>
+                Compressors are significantly more code-optimized than Angle Locks in Plane Crazy's engine.
+            </p>
+            <ul>
+                <li><strong>0-Angle Replacement:</strong> If you have an Angle Lock set to an angle of <code>0</code>, replace it with a Compressor set to <code>0</code> distance.</li>
+                <li><strong>Performance Ratio:</strong> In terms of server performance, 1 Compressor is roughly equal to 2 Angle Locks (1 Compressor ≈ 2 Angle Locks).</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section id="zipper-locking">
+            <h2>Zipper Locking Tech</h2>
+            <p>
+                <strong>Zipper Locking</strong> is an advanced technique where you use the Move Tool to physically shift a block so its thin part or attachment point touches two adjacent blocks simultaneously, compressing them together to save block count.
+            </p>
+
+            <blockquote class="warning-box">
+                <strong>Note:</strong> You must <strong>re-zipper</strong> your build every time you load the save slot for the compression to take effect.
+            </blockquote>
+
+            <h3>Zipper Blocks & Rotations</h3>
+            
+            <div class="zipper-grid">
+                <figure>
+                    <img src="../../images/optimisation/zipper_angle_lock.png" alt="Angle Lock Zipper">
+                    <figcaption><strong>Angle Lock (Rotating Part) [BEST]:</strong> Invincible rotating part makes it durable under heavy strain.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/optimisation/zipper_balljoint.png" alt="Balljoint Zipper">
+                    <figcaption><strong>Balljoint:</strong> Zippers using the base half (where the arrow originates).</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/optimisation/zipper_ujoint.png" alt="Universal Joint Zipper">
+                    <figcaption><strong>Universal Joint:</strong> Zippers using the base half (where the arrow originates).</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/optimisation/zipper_motors.png" alt="Motor Zipper">
+                    <figcaption><strong>Motors & Motor2:</strong> Zippers using the thin section.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/optimisation/zipper_hinge.png" alt="Hinge Zipper">
+                    <figcaption><strong>Hinges:</strong> Zippers using the thin section.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/optimisation/zipper_piston.png" alt="Piston Zipper">
+                    <figcaption><strong>Pistons & Half Pistons:</strong> Zippers using the extension rod part.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/optimisation/zipper_disconnector.png" alt="Disconnector Zipper">
+                    <figcaption><strong>Disconnectors:</strong> Zippers using the thin section.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/optimisation/zipper_spring.png" alt="Spring Zipper">
+                    <figcaption><strong>Springs:</strong> Zippers using the bottom section.</figcaption>
+                </figure>
+            </div>
+          
+        <!-- SECTION 5 -->
+        <section id="clearance">
+            <h2>Clearance & Collision Prevention</h2>
+            <p>
+                Ensure that the pushing, pulling, or rotating parts of Angle Locks and Compressors do not make physical contact with surrounding blocks unless explicitly required. Phantom touching or clipping between moving mechanical parts causes micro-stutters and severe physics lag when rotating at high speeds.
+            </p>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section id="plus-one">
+            <h2>+1 Compressor Configurations</h2>
+            <p>
+                Utilize "+1" Compressor setups (nesting or stacking internal rows) to compress multiple segments using fewer total mechanical parts, saving space and drastically cutting down overall block counts.
+            </p>
+        </section>
+
+    </main>
+
+    <footer id="wiki-footer"></footer>
+    <script src="../../js/skidunited.js"></script>
+
+</body>
+
+</html>
