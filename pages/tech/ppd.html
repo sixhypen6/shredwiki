@@ -31,56 +31,56 @@
 
         <!-- INTRO PARAGRAPH -->
         <p>
-            <strong>Physics Priority Distribution (PPD)</strong> is a low-level engine mechanic within Roblox that dictates how physics calculations and solver priorities are assigned to assemblies when state changes occur. Most of the foundational research on PPD was conducted by <strong>KAMEON</strong>.
+            <strong>Physics Priority Distribution (PPD)</strong> is an engine-level physics state mechanic. Most of the research on PPD was pioneered by <strong>KAMEON</strong>. It explains why certain anchor toggles trigger extreme physics anomalies while others behave normally.
         </p>
 
         <!-- TABLE OF CONTENTS -->
         <nav class="toc-box">
             <div class="toc-title">Contents</div>
             <ul>
-                <li><a href="#overview">1 Overview & Mechanics</a></li>
-                <li><a href="#binary-priority">2 Binary Priority States</a></li>
-                <li><a href="#applications">3 Applications in Void Tech</a></li>
+                <li><a href="#overview">1 Mechanics & Anchor States</a></li>
+                <li><a href="#binary-priority">2 Binary State Assigning (0 vs 1)</a></li>
+                <li><a href="#applications">3 Relation to Void Tech</a></li>
             </ul>
         </nav>
 
         <!-- SECTION 1: OVERVIEW -->
         <section id="overview">
-            <h2>1. Overview & Mechanics</h2>
+            <h2>1. Mechanics & Anchor States</h2>
             <p>
-                When a part toggles its anchored state—specifically during unanchoring or re-anchoring sequences—the physics engine assigns a internal priority state value to the affected assembly.
+                Whenever a part or assembly is unanchored or re-anchored, the engine assigns an internal solver priority value to it. 
             </p>
             <p>
-                Depending on this assigned value, the game engine processes the assembly's velocity, constraint updates, and server-client network synchronization differently.
+                Because this assignment happens dynamically upon toggling anchors, anchorfling and separation modules have a chance-based activation rate depending on which priority value the engine assigns to the module during its unanchor sequence.
             </p>
         </section>
 
         <!-- SECTION 2: BINARY PRIORITY STATES -->
         <section id="binary-priority">
-            <h2>2. Binary Priority States</h2>
+            <h2>2. Binary State Assigning (0 vs 1)</h2>
             <p>
-                The assigned state effectively operates as a binary flag (conceptually represented as <code>0</code> or <code>1</code>):
+                In simplified terms, the state assignment operates like a binary value (<code>0</code> or <code>1</code>):
             </p>
 
             <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
                 <li>
-                    <strong>Standard Physics (Value A):</strong> The assembly behaves strictly under standard Roblox physics solver constraints. Interpolation between client and server remains synchronized.
+                    <strong>Normal State:</strong> Standard solver behavior where physics updates and positional constraints behave deterministically on both server and client.
                 </li>
                 <li>
-                    <strong>Bugged / Desynced State (Value B):</strong> The assembly is handled with altered priority in the physics pipeline. Under this state, constraints can yield unintended torque, delayed positional updates, or extreme velocity multiplication when coupled with anchor-flings.
+                    <strong>Bugged Physics State:</strong> An anomalous priority state where constraint calculations produce erratic velocities, desynced server-client interpolation, or forced separation across anchor blocks.
                 </li>
             </ul>
 
             <div class="callout callout-note">
-                <strong>RESEARCH NOTE:</strong> Credit to <strong>KAMEON</strong> for isolating PPD state behavior during anchor-reanchor physics testing.
+                <strong>CREDIT:</strong> Research on anchor priority assignment and state distribution credit goes to <strong>KAMEON</strong>.
             </div>
         </section>
 
         <!-- SECTION 3: VOID TECH APPLICATIONS -->
         <section id="applications">
-            <h2>3. Applications in Void Tech</h2>
+            <h2>3. Relation to Void Tech</h2>
             <p>
-                PPD manipulation is the driving factor behind inconsistent or high-potency <a href="voidtech.html">Void Tech</a> charges. Because anchorfling modules rely on forced separation between assembly roots, landing a "bugged" PPD state upon unanchoring is often what causes hyper-surging or instantaneous void clipping.
+                PPD is the underlying engine cause for why <a href="voidtech.html">Void Tech</a> modules sometimes fail or succeed upon spawning or charging. Getting assigned the bugged priority state during an anchorfling is what causes the build to separate across constraints and enter a surge state.
             </p>
         </section>
 
