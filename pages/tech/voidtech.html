@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Void Tech | Plane Crazy Tech</title>
-    <!-- 2 levels up to root css -->
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 
@@ -14,106 +13,75 @@
     <div id="wiki-nav"></div>
 
     <main class="wiki-container">
-        <!-- PAGE HEADER -->
         <h1>Void Tech</h1>
 
         <div class="wiki-categories">
             <span class="wiki-cat">Physics Engine</span>
             <span class="wiki-cat">Tech</span>
+            <span class="wiki-cat">Surge</span>
         </div>
 
         <nav class="wiki-breadcrumb">
             <a href="../../index.html">Home</a> &gt; <a href="../techmanifest.html">TechManifest</a> &gt; <span>Void Tech</span>
         </nav>
 
-        <div class="wiki-last-edited">Last edited on 19 May 2026 by peacekeepe_r</div>
+        <div class="wiki-last-edited">Last edited on 26 Jul 2026</div>
 
-        <!-- QUOTE -->
-        <figure class="wiki-quote">
-            <blockquote>"You sure you wanna mess with a void tech user?"</blockquote>
-            <figcaption>— Hyperbloxxer, <cite>Roblox.com</cite></figcaption>
-        </figure>
+        <p>
+            <strong>Void Tech</strong> is a physics manipulation mechanic centered around <strong>Axis Lock</strong> (preventative and corrective) and <strong>Void Surge</strong>. It is achieved by flinging a non-teleporting constraint past its pulling point while an anchor module remains anchored.
+        </p>
 
-        <!-- TABLE OF CONTENTS -->
         <nav class="toc-box">
             <div class="toc-title">Contents</div>
             <ul>
-                <li><a href="#overview">1 Overview</a></li>
-                <li><a href="#surge">2 Surge Effects</a></li>
-                <li>
-                    <a href="#charging">3 Charging Methods</a>
-                    <ul>
-                        <li><a href="#ppd">3.1 PPD-Based Charging</a></li>
-                        <li><a href="#non-ppd">3.2 Non-PPD Charging</a></li>
-                    </ul>
-                </li>
+                <li><a href="#architecture">1 Architecture Topology (Build, Battery, Charger)</a></li>
+                <li><a href="#characteristics">2 Core Characteristics</a></li>
+                <li><a href="#constraints">3 Recommended Constraints</a></li>
             </ul>
         </nav>
 
-        <!-- OVERVIEW SECTION -->
-        <section id="overview">
-            <h2>1 Overview</h2>
-            
-            <div class="wiki-thumb thumb-right">
-                <div class="thumb-inner">
-                    <img src="../../assests/voidgif2.gif" alt="Anchorfling Void, Hypersurge">
-                    <div class="thumb-caption">Anchorfling Void, Hypersurge.</div>
-                </div>
-            </div>
+        <!-- SECTION 1: ARCHITECTURE -->
+        <section id="architecture">
+            <h2>1. Architecture Topology</h2>
+            <p>
+                Standard Void Tech relies on a stacked 3-tier modular connection topology separated by vast stud distances:
+            </p>
 
-            <p>
-                <strong>Void tech</strong> consists of two anchored blocks (the main build & the module) situated far apart and connected by a constraint (such as motor joints). It relies on a high-velocity <strong>fling module</strong> to force a separation between them. 
-            </p>
-            <p>
-                Originally discovered as a method to bypass the workspace <code>FallenPartsDestroyHeight</code> limit (~-5000 units), Void Tech allows vehicles to operate below the kill barrier without instantly despawning.
-            </p>
-            <p>
-                Additionally, Void Tech automatically forces an <strong>Axis Lock</strong> state on the assembly. Beyond simply surviving the void, if the root part remains in motion, it heavily disrupts Roblox's server-client interpolation—resulting in positional surgetech, desynced invincibility, and extreme flinging mechanics when combined with secondary constraints.
-            </p>
+            <ul>
+                <li><strong>BUILD:</strong> The primary vessel or payload structure being stabilized. Connected to the Battery via a <strong>100k+ stud</strong> separation gap.</li>
+                <li><strong>"BATTERY":</strong> Intermediate power/state distribution unit positioned between the primary build and the charger.</li>
+                <li><strong>"CHARGER":</strong> Base anchor module linked to the Battery via <em>N studs</em>. Responsible for storing and releasing constraint tension.</li>
+            </ul>
+
+            <div class="callout callout-info">
+                <strong>Terminology Note:</strong> The <em>Charger</em> holds high-torque constraint velocity/tension in a locked state before release. The <em>Battery</em> maintains and feeds the resulting displaced state to the primary Build.
+            </div>
         </section>
 
-        <!-- SURGE SECTION -->
-        <section id="surge">
-            <h2>2 Surge Effects</h2>
-            <p>
-                <strong>Surge</strong> is the primary observable side-effect of Void Tech. On the server side and for other players, the build appears to "go crazy" or violently jitter/fling across screen space. On the user's client side, movement remains smooth and controlled.
-            </p>
-            <p>
-                Depending on the strength, quality, and execution of the initial fling, several tiers of surge can occur:
-            </p>
-            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                <li><strong>Microsurge:</strong> Subtle interpolation jittering; harder for opponents to hit.</li>
-                <li><strong>Hypersurge:</strong> Extreme visual desync covering massive areas of the map.</li>
-                <li><strong>Invisibility:</strong> Client rendering falls out of bounds relative to server bounding boxes.</li>
+        <!-- SECTION 2: CHARACTERISTICS -->
+        <section id="characteristics">
+            <h2>2. Core Characteristics</h2>
+            <ul>
+                <li><strong>Basic & Strong Surge:</strong> Generates significant positional displacement/jitter whenever the module anchor is activated. Void surge is notably stronger than standard Antivoid surge.</li>
+                <li><strong>Void Immunity:</strong> Grants immunity against falling beneath the world void threshold and boundary resets.</li>
+                <li><strong>Axis Lock:</strong> Provides directional and rotational stability depending on constraint selection.</li>
+                <li><strong>No Native Void Fling:</strong> Standard Void Tech configurations do not natively support void flinging without RD/Antivoid modifications.</li>
             </ul>
         </section>
 
-        <!-- CHARGING SECTION -->
-        <section id="charging">
-            <h2>3 Charging Methods</h2>
-            
-            <div class="callout callout-note">
-                <strong>NOTE:</strong> Anchorfling modules rely on physics solver timing and have a chance to fail on activation depending on <a href="ppd.html">PPD state assignment</a>.
-            </div>
-
-            <p>There are multiple ways to charge and activate a Void Tech module, with the most reliable methods relying on high-velocity void flings.</p>
-
-            <div id="ppd">
-                <h3>3.1 PPD-Based Charging</h3>
-                <p>
-                    <a href="ppd.html">PPD (Physics Priority Distribution)</a> charging relies on state assignment behaviors during anchor/unanchor sequences to force anchor constraints to separate cleanly and trigger bugged physics states.
-                </p>
-            </div>
-
-            <div id="non-ppd">
-                <h3>3.2 Non-PPD Charging</h3>
-                <p><em>Documentation pending...</em></p>
+        <!-- SECTION 3: CONSTRAINTS -->
+        <section id="constraints">
+            <h2>3. Recommended Constraints</h2>
+            <p>
+                While various physics joints exist, Void Tech is **best paired with HingeConstraints** (used by both standard Hinges and Motor blocks).
+            </p>
+            <div class="callout callout-tip">
+                <strong>Physics Insight:</strong> Under the hood, Hinges and Motors run on identical <code>HingeConstraint</code> logic. Their high torque capacity and predictable rotational limits make them ideal for maintaining stable Axis Locks without snapping prematurely.
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
     <footer id="wiki-footer"></footer>
     <script src="../../js/skidunited.js"></script>
 
