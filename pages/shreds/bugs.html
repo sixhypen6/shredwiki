@@ -35,7 +35,7 @@
                 <li>
                     <a href="#category-1">1 Category Name 1</a>
                     <ul>
-                        <li><a href="#bug-1">1.1 [Bug Name 1]</a></li>
+                        <li><a href="#tnt-compression-bug">1.1 TNT Detonation Failure</a></li>
                         <li><a href="#bug-2">1.2 [Bug Name 2]</a></li>
                     </ul>
                 </li>
@@ -52,14 +52,33 @@
         <section id="category-1">
             <h2>Category Name 1</h2>
 
-            <div id="bug-1">
-                <h3>[Bug Name 1]</h3>
-                <div class="callout callout-note">
-                    <strong>SEVERITY:</strong> High / Medium / Low | <strong>AFFECTS:</strong> [Block/Module Type]
-                </div>
-                <p><strong>Description:</strong> Brief overview of what happens, how to reproduce it, or why it breaks.</p>
-                <p><strong>Workaround:</strong> How players can fix or bypass this issue in their build.</p>
-            </div>
+            <div id="tnt-compression-bug">
+    <h3>TNT Detonation Failure</h3>
+    <div class="callout callout-note">
+        <strong>SEVERITY:</strong> High | <strong>AFFECTS:</strong> Explosives, Staging & Ghosting
+    </div>
+    <p><strong>Description:</strong> TNT fails to blow up completely or detonate at all when activated.</p>
+    <p><strong>Cause:</strong> Caused by the build having too many Compressor Blocks or Angle Locks. This usually occurs on modern shredder builds and starts breaking around 600 blocks (depending heavily on the total count of Angle Locks and Compressors).</p>
+    <p><strong>Workarounds:</strong></p>
+    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+        <li><strong>For Ghosting Blocks (Rockets, Cutters):</strong> Do not ghost them—use them normally instead. If you are using huge jet engines as invincible blocks, use Compressors or Angle Locks instead.</li>
+        <li><strong>For Staging / Disconnecting:</strong> Use Disconnectors, Springs, or a combination of both instead of TNT.</li>
+    </ul>
+    
+    <div class="callout callout-note" style="margin-top: 0.5rem;">
+        <strong>NOTE ON ALTERNATIVES:</strong> 
+        <ul style="margin-left: 1.2rem; margin-top: 0.3rem; margin-bottom: 0;">
+            <li><strong>Disconnectors:</strong> Leaves behind a leftover part that retains active collision on your build.</li>
+            <li>
+                <strong>Springs:</strong> The bottom base of a spring never detaches upon release. Additionally, springs can get trapped inside non-hollow armor setups if there isn't enough expansion force to push them out of the build.
+                <ul style="margin-left: 1.2rem; margin-top: 0.3rem;">
+                    <li><strong>Ejection Technique:</strong> To force stuck springs out, your build must anchor while moving at a speed of around 300 (required speed varies by armor thickness; e.g., 9x9 cubes struggle to eject springs at lower speeds compared to 3x3 setups).</li>
+                    <li><strong>Anchor Settings:</strong> Enabling the <em>"Bring Connected"</em> toggle on the Anchor Block helps retain stability, as the sudden stop can otherwise cause the shredder to fling.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
 
             <div id="bug-2">
                 <h3>[Bug Name 2]</h3>
