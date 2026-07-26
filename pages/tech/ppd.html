@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPD (Physics Priority Distribution) | Plane Crazy Tech</title>
+    <!-- 2 levels up to root css -->
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+
+    <div id="wiki-nav"></div>
+
+    <main class="wiki-container">
+        <!-- PAGE HEADER -->
+        <h1>Physics Priority Distribution (PPD)</h1>
+
+        <div class="wiki-categories">
+            <span class="wiki-cat">Physics Engine</span>
+            <span class="wiki-cat">Tech</span>
+            <span class="wiki-cat">Core Mechanics</span>
+        </div>
+
+        <nav class="wiki-breadcrumb">
+            <a href="../../index.html">Home</a> &gt; <a href="../techmanifest.html">TechManifest</a> &gt; <span>PPD</span>
+        </nav>
+
+        <div class="wiki-last-edited">Last edited on 26 Jul 2026</div>
+
+        <!-- INTRO PARAGRAPH -->
+        <p>
+            <strong>Physics Priority Distribution (PPD)</strong> is a low-level engine mechanic within Roblox that dictates how physics calculations and solver priorities are assigned to assemblies when state changes occur. Most of the foundational research on PPD was conducted by <strong>KAMEON</strong>.
+        </p>
+
+        <!-- TABLE OF CONTENTS -->
+        <nav class="toc-box">
+            <div class="toc-title">Contents</div>
+            <ul>
+                <li><a href="#overview">1 Overview & Mechanics</a></li>
+                <li><a href="#binary-priority">2 Binary Priority States</a></li>
+                <li><a href="#applications">3 Applications in Void Tech</a></li>
+            </ul>
+        </nav>
+
+        <!-- SECTION 1: OVERVIEW -->
+        <section id="overview">
+            <h2>1. Overview & Mechanics</h2>
+            <p>
+                When a part toggles its anchored state—specifically during unanchoring or re-anchoring sequences—the physics engine assigns a internal priority state value to the affected assembly.
+            </p>
+            <p>
+                Depending on this assigned value, the game engine processes the assembly's velocity, constraint updates, and server-client network synchronization differently.
+            </p>
+        </section>
+
+        <!-- SECTION 2: BINARY PRIORITY STATES -->
+        <section id="binary-priority">
+            <h2>2. Binary Priority States</h2>
+            <p>
+                The assigned state effectively operates as a binary flag (conceptually represented as <code>0</code> or <code>1</code>):
+            </p>
+
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                <li>
+                    <strong>Standard Physics (Value A):</strong> The assembly behaves strictly under standard Roblox physics solver constraints. Interpolation between client and server remains synchronized.
+                </li>
+                <li>
+                    <strong>Bugged / Desynced State (Value B):</strong> The assembly is handled with altered priority in the physics pipeline. Under this state, constraints can yield unintended torque, delayed positional updates, or extreme velocity multiplication when coupled with anchor-flings.
+                </li>
+            </ul>
+
+            <div class="callout callout-note">
+                <strong>RESEARCH NOTE:</strong> Credit to <strong>KAMEON</strong> for isolating PPD state behavior during anchor-reanchor physics testing.
+            </div>
+        </section>
+
+        <!-- SECTION 3: VOID TECH APPLICATIONS -->
+        <section id="applications">
+            <h2>3. Applications in Void Tech</h2>
+            <p>
+                PPD manipulation is the driving factor behind inconsistent or high-potency <a href="voidtech.html">Void Tech</a> charges. Because anchorfling modules rely on forced separation between assembly roots, landing a "bugged" PPD state upon unanchoring is often what causes hyper-surging or instantaneous void clipping.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="wiki-footer"></footer>
+    <script src="../../js/skidunited.js"></script>
+
+</body>
+
+</html>
