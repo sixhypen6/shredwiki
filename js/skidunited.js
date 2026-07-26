@@ -1,26 +1,52 @@
 let searchData = [];
 
 // ═══════════════════════════════════════════
-//  NAV INJECTION
+//   PATH DETECTOR (Supports nested folders)
+// ═══════════════════════════════════════════
+
+function getBasePath() {
+    const path = window.location.pathname;
+    const projectFolder = '/shredwiki/';
+    const index = path.indexOf(projectFolder);
+
+    // If hosted under /shredwiki/ on GitHub Pages
+    if (index !== -1) {
+        return path.substring(0, index + projectFolder.length);
+    }
+
+    // Dynamic relative fallback based on depth in structure
+    if (path.includes('/pages/shreds/') || path.includes('/pages/tech/')) {
+        return '../../';
+    } else if (path.includes('/pages/')) {
+        return '../';
+    }
+    return './';
+}
+
+// ═══════════════════════════════════════════
+//   NAV INJECTION
 // ═══════════════════════════════════════════
 
 function buildNav() {
     const placeholder = document.getElementById('wiki-nav');
     if (!placeholder) return;
 
+    const basePath = getBasePath();
     const p = window.location.pathname;
+
     const link = (href, label) => {
-        const cls = (p === href || p.endsWith(href)) ? ' class="active"' : '';
-        return `<li><a href="${href}"${cls}>${label}</a></li>`;
+        const fullHref = basePath + href;
+        const cls = (p === fullHref || p.endsWith(href)) ? ' class="active"' : '';
+        return `<li><a href="${fullHref}"${cls}>${label}</a></li>`;
     };
 
     placeholder.outerHTML = `
         <nav class="navbar">
             <div class="logo"><h2 class="wiki-ambient-reflection">Plane Crazy Shredder and Tech wiki</h2></div>
             <ul class="nav-links">
-                ${link('https://sixhypen6/shredwiki/index.html', 'Home')}
-                ${link('https://sixhypen6/shredwiki/pages/shredderhub.html', 'ShredderHub')}
-                ${link('https://sixhypen6/shredwiki/pages/techmanifest.html', 'TechManifest')}
+                ${link('index.html', 'Home')}
+                ${link('pages/shredderhub.html', 'ShredderHub')}
+                ${link('pages/techmanifest.html', 'TechManifest')}
                 <div class="search-container">
                     <input type="text" id="wiki-search" placeholder="Search for TECH..." autocomplete="off">
                     <div id="wiki-results" class="search-results-box"></div>
@@ -30,7 +56,7 @@ function buildNav() {
 }
 
 // ═══════════════════════════════════════════
-//  FOOTER INJECTION
+//   FOOTER INJECTION
 // ═══════════════════════════════════════════
 
 function buildFooter() {
@@ -46,16 +72,20 @@ function buildFooter() {
         </div>
     </div>
 
-    <!-- Pre-Ownership Change Section (Spaced further apart) -->
+    <!-- Pre-Ownership Change Section -->
     <div class="credits-row" style="margin-top: 3.5rem; gap: 2rem;">
-       <div class="credit-category">
+        <div class="credit-category">
             <strong>Original Creator/Owner:</strong>
             <div class="credit-member">
                 <span class="member-name">platform2 (759825779974209616)</span>
                 <small class="credit-note">Main coder, page writing, design.</small>
             </div>
+            <div class="credit-member">
+                <span class="member-name">peacekeepe_r (850394478895300629)</span>
+                <small class="credit-note">Main writer, main design, minor coding.</small>
+            </div>
         </div>
-        
+
         <div class="credit-category">
             <strong>Writers (Pre Ownership Change):</strong>
             <div class="credit-member">
@@ -100,14 +130,13 @@ function buildFooter() {
     <a href="https://discord.gg/VFFgyCzu8m" target="_blank" rel="noopener noreferrer">Exploiter Community</a>
 </p>`;
 }
+
 // ═══════════════════════════════════════════
-//  SEARCH
+//   SEARCH
 // ═══════════════════════════════════════════
 
 function initWikiSearch() {
-    const path = window.location.pathname;
-    const rootEndIndex = path.indexOf('/Omni/');
-    const basePath = rootEndIndex !== -1 ? path.substring(0, rootEndIndex + 6) : '/';
+    const basePath = getBasePath();
 
     fetch(basePath + 'search-index.json')
         .then(r => {
@@ -121,10 +150,7 @@ function initWikiSearch() {
         .catch(err => console.error('[wiki-search] fetch failed:', err));
 
     const searchInput = document.getElementById('wiki-search');
-    if (!searchInput) {
-        console.error('[wiki-search] input element not found in DOM');
-        return;
-    }
+    if (!searchInput) return;
 
     searchInput.addEventListener('input', runWikiSearch);
     searchInput.addEventListener('focus', runWikiSearch);
@@ -152,9 +178,9 @@ function runWikiSearch() {
     const results = query === ''
         ? searchData.slice(0, 8)
         : searchData.filter(page => {
-            const matchesTitle   = page.title.toLowerCase().includes(query);
+            const matchesTitle   = page.title ? page.title.toLowerCase().includes(query) : false;
             const matchesSnippet = String(page.snippet ?? '').toLowerCase().includes(query);
-            const matchesTags    = page.tags.some(tag => tag.toLowerCase().includes(query));
+            const matchesTags    = page.tags ? page.tags.some(tag => tag.toLowerCase().includes(query)) : false;
             return matchesTitle || matchesSnippet || matchesTags;
         });
 
@@ -163,9 +189,7 @@ function runWikiSearch() {
         return;
     }
 
-    const path = window.location.pathname;
-    const rootEndIndex = path.indexOf('/Omni/');
-    const basePath = rootEndIndex !== -1 ? path.substring(0, rootEndIndex + 6) : '/';
+    const basePath = getBasePath();
 
     resultsContainer.innerHTML = results.map(page => {
         const cleanUrl = page.url.startsWith('/') ? page.url.substring(1) : page.url;
@@ -181,8 +205,7 @@ function runWikiSearch() {
 }
 
 // ═══════════════════════════════════════════
-//  INIT — order matters: nav/footer first,
-//  then search (needs #wiki-search in DOM)
+//   INIT & LAZY LOAD
 // ═══════════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -190,9 +213,6 @@ document.addEventListener('DOMContentLoaded', function () {
     buildFooter();
     initWikiSearch();
 
-    // ── LAZY-LOAD VIDEOS ──────────────────────
-    // Add class="lazy-video" and data-src="path/to/video.mp4"
-    // to any <video> element to defer loading until in view.
     const lazyVideos = document.querySelectorAll('video.lazy-video');
     if (lazyVideos.length) {
         if ('IntersectionObserver' in window) {
@@ -212,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             lazyVideos.forEach(v => observer.observe(v));
         } else {
-            // Fallback: load all immediately
             lazyVideos.forEach(function (video) {
                 const src = video.getAttribute('data-src');
                 if (src) {
@@ -225,8 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ═══════════════════════════════════════════
-//  EASTER EGG: type "duckless" on the home
-//  page to play the secret music
+//   EASTER EGG
 // ═══════════════════════════════════════════
 
 let typedKeys = '';
@@ -234,13 +252,10 @@ const secretWord = 'duckless';
 let secretAudio = null;
 
 document.addEventListener('keydown', function (e) {
-    // Ignore keypresses inside inputs / editable fields
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
 
     const path = window.location.pathname;
-    const rootEndIndex = path.indexOf('/Omni/');
-    const basePath = rootEndIndex !== -1 ? path.substring(0, rootEndIndex + 6) : '/';
-    const isHomePage = path === basePath || path.endsWith('index.html') || path.endsWith('/');
+    const isHomePage = path.endsWith('index.html') || path.endsWith('/') || path.endsWith('shredwiki/');
 
     if (!isHomePage) return;
     if (e.key.length !== 1) return;
@@ -251,6 +266,7 @@ document.addEventListener('keydown', function (e) {
     }
 
     if (typedKeys === secretWord) {
+        const basePath = getBasePath();
         if (!secretAudio) {
             secretAudio = new Audio(basePath + 'assests/secretmusic.mp3');
         }
