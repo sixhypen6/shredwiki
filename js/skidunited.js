@@ -48,13 +48,14 @@ function buildFooter() {
 
     <!-- Pre-Ownership Change Section (Spaced further apart) -->
     <div class="credits-row" style="margin-top: 3.5rem; gap: 2rem;">
-        <div class="credit-category">
+       <div class="credit-category">
             <strong>Original Creator/Owner:</strong>
             <div class="credit-member">
-                <span class="member-name">platform2</span>
+                <span class="member-name">platform2 (759825779974209616)</span>
+                <small class="credit-note">Main coder, page writing, design.</small>
             </div>
         </div>
-
+        
         <div class="credit-category">
             <strong>Writers (Pre Ownership Change):</strong>
             <div class="credit-member">
