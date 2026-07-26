@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Home",
+    "url": "index.html",
+    "snippet": "Main hub and home page of the Plane Crazy Shredder and Tech wiki.",
+    "tags": ["home", "main", "hub", "index"],
+    "categories": ["Main"]
+  },
+  {
+    "title": "ShredderHub",
+    "url": "pages/shredderhub.html",
+    "snippet": "Directory and overview for all shredder-related guides, modules, and mechanics.",
+    "tags": ["shredder", "hub", "guides", "directory"],
+    "categories": ["Hub"]
+  },
+  {
+    "title": "TechManifest",
+    "url": "pages/techmanifest.html",
+    "snippet": "Collection of all tech pages, void tech, and advanced mechanics.",
+    "tags": ["tech", "manifest", "void", "mechanics"],
+    "categories": ["Hub", "Tech"]
+  },
+  {
+    "title": "Massless and Staging",
+    "url": "pages/shreds/massless.html",
+    "snippet": "Core guide on massless modules, staging constraints, motor locking, and preventing gyros.",
+    "tags": ["massless", "staging", "desync", "gyros", "modules", "balljoint"],
+    "categories": ["Shredders", "Module"]
+  },
+  {
+    "title": "Axis Locks",
+    "url": "pages/shreds/axislocks.html",
+    "snippet": "Information and guides on axis locks and stabilization.",
+    "tags": ["axis", "locks", "stabilization", "shredders"],
+    "categories": ["Shredders"]
+  },
+  {
+    "title": "Blades",
+    "url": "pages/shreds/blades.html",
+    "snippet": "Blade designs, motor setups, and damage application.",
+    "tags": ["blades", "motors", "damage", "shredders"],
+    "categories": ["Shredders"]
+  },
+  {
+    "title": "Gyro Core",
+    "url": "pages/shreds/gyrocore.html",
+    "snippet": "Understanding gyro cores, rotational stability, and torque control.",
+    "tags": ["gyro", "core", "stability", "torque"],
+    "categories": ["Shredders", "Module"]
+  }
+]
