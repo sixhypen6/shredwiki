@@ -59,12 +59,16 @@ function buildNav() {
 //   FOOTER INJECTION
 // ═══════════════════════════════════════════
 
+// ═══════════════════════════════════════════
+//   FOOTER INJECTION
+// ═══════════════════════════════════════════
+
 function buildFooter() {
     const el = document.getElementById('wiki-footer');
     if (!el) return;
 
     el.innerHTML = `<div class="credits-container">
-    <!-- Main / Current Owner Section -->
+    <!-- Main / Current Owner Section (Visible by Default) -->
     <div class="credit-category central-feature">
         <strong><span class="wiki-title-shimmer">Repository Owner:</span></strong>
         <div class="credit-member">
@@ -72,59 +76,65 @@ function buildFooter() {
         </div>
     </div>
 
-    <!-- Pre-Ownership Change Section -->
-    <div class="credits-row" style="margin-top: 3.5rem; gap: 2rem;">
-        <div class="credit-category">
-            <strong>Original Creator/Owner:</strong>
-            <div class="credit-member">
-                <span class="member-name">platform2 (759825779974209616)</span>
-                <small class="credit-note">Main coder, page writing, design.</small>
+    <!-- Collapsible Pre-Ownership Credits -->
+    <details style="margin-top: 1.5rem; text-align: center; cursor: pointer;">
+        <summary style="font-size: 0.8rem; color: #8b949e; opacity: 0.8; user-select: none;">
+            original credits / contributors
+        </summary>
+        
+        <div class="credits-row" style="margin-top: 1.5rem; gap: 2rem; text-align: left;">
+            <div class="credit-category">
+                <strong>Original Creator/Owner:</strong>
+                <div class="credit-member">
+                    <span class="member-name">platform2 (759825779974209616)</span>
+                    <small class="credit-note">Main coder, page writing, design.</small>
+                </div>
+                <div class="credit-member">
+                    <span class="member-name">peacekeepe_r (850394478895300629)</span>
+                    <small class="credit-note">Main writer, main design, minor coding.</small>
+                </div>
             </div>
-            <div class="credit-member">
-                <span class="member-name">peacekeepe_r (850394478895300629)</span>
-                <small class="credit-note">Main writer, main design, minor coding.</small>
-            </div>
-        </div>
 
-        <div class="credit-category">
-            <strong>Writers (Pre Ownership Change):</strong>
-            <div class="credit-member">
-                <span class="member-name">kameon</span>
-                <small class="credit-note">Writing, design assets, "beta testing" and major corrections.</small>
+            <div class="credit-category">
+                <strong>Writers (Pre Ownership Change):</strong>
+                <div class="credit-member">
+                    <span class="member-name">kameon</span>
+                    <small class="credit-note">Writing, design assets, "beta testing" and major corrections.</small>
+                </div>
+                <div class="credit-member">
+                    <span class="member-name">peacekeepe_r</span>
+                    <small class="credit-note">Most of the shredder-side, rewriting</small>
+                </div>
+                <div class="credit-member">
+                    <span class="member-name">platform2</span>
+                    <small class="credit-note">Drafting and writing shredder pages.</small>
+                </div>
+                <div class="credit-member">
+                    <span class="member-name">goober</span>
+                    <small class="credit-note">Assistance with shredder writing.</small>
+                </div>
             </div>
-            <div class="credit-member">
-                <span class="member-name">peacekeepe_r</span>
-                <small class="credit-note">Most of the shredder-side, rewriting</small>
-            </div>
-            <div class="credit-member">
-                <span class="member-name">platform2</span>
-                <small class="credit-note">Drafting and writing shredder pages.</small>
-            </div>
-            <div class="credit-member">
-                <span class="member-name">goober</span>
-                <small class="credit-note">Assistance with shredder writing.</small>
-            </div>
-        </div>
 
-        <div class="credit-category">
-            <strong>Contributors (Pre Ownership Change):</strong>
-            <div class="credit-member">
-                <span class="member-name">glitchedtm</span>
-                <small class="credit-note">Natural Selection.</small>
-            </div>
-            <div class="credit-member">
-                <span class="member-name">killer_meetball.</span>
-                <small class="credit-note">Tech info, minor writing.</small>
-            </div>
-            <div class="credit-member">
-                <span class="member-name">legallypvid</span>
-                <small class="credit-note">Tech info, minor writing.</small>
+            <div class="credit-category">
+                <strong>Contributors (Pre Ownership Change):</strong>
+                <div class="credit-member">
+                    <span class="member-name">glitchedtm</span>
+                    <small class="credit-note">Natural Selection.</small>
+                </div>
+                <div class="credit-member">
+                    <span class="member-name">killer_meetball.</span>
+                    <small class="credit-note">Tech info, minor writing.</small>
+                </div>
+                <div class="credit-member">
+                    <span class="member-name">legallypvid</span>
+                    <small class="credit-note">Tech info, minor writing.</small>
+                </div>
             </div>
         </div>
-    </div>
+    </details>
 </div>
 
-<hr style="margin-top: 3rem;">
+<hr style="margin-top: 2rem;">
 <p style="text-align: center;">
     Originally made for the Neo Shredder Group, now for the 
     <a href="https://discord.gg/VFFgyCzu8m" target="_blank" rel="noopener noreferrer">Exploiter Community</a>
