@@ -52,7 +52,7 @@
 
         <!-- OVERVIEW SECTION -->
         <section id="overview">
-            <h2>Overview</h2>
+            <h2>1 Overview</h2>
             
             <div class="wiki-thumb thumb-right">
                 <div class="thumb-inner">
@@ -74,7 +74,7 @@
 
         <!-- SURGE SECTION -->
         <section id="surge">
-            <h2>Surge Effects</h2>
+            <h2>2 Surge Effects</h2>
             <p>
                 <strong>Surge</strong> is the primary observable side-effect of Void Tech. On the server side and for other players, the build appears to "go crazy" or violently jitter/fling across screen space. On the user's client side, movement remains smooth and controlled.
             </p>
@@ -90,17 +90,19 @@
 
         <!-- CHARGING SECTION -->
         <section id="charging">
-            <h2>Charging Methods</h2>
+            <h2>3 Charging Methods</h2>
             
             <div class="callout callout-note">
-                <strong>NOTE:</strong> Anchorfling modules rely on high-frame physics calculations and have a chance to fail on activation depending on server performance (PPD).
+                <strong>NOTE:</strong> Anchorfling modules rely on physics solver timing and have a chance to fail on activation depending on <a href="ppd.html">PPD state assignment</a>.
             </div>
 
             <p>There are multiple ways to charge and activate a Void Tech module, with the most reliable methods relying on high-velocity void flings.</p>
 
             <div id="ppd">
                 <h3>3.1 PPD-Based Charging</h3>
-                <p>PPD (Parts Per Degree / Physics Processing Delay) charging relies on physics engine strain to delay local frame updates, forcing the anchor constraints to separate cleanly.</p>
+                <p>
+                    <a href="ppd.html">PPD (Physics Priority Distribution)</a> charging relies on state assignment behaviors during anchor/unanchor sequences to force anchor constraints to separate cleanly and trigger bugged physics states.
+                </p>
             </div>
 
             <div id="non-ppd">
