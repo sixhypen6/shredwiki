@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antivoid Tech | Plane Crazy Tech</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+
+    <div id="wiki-nav"></div>
+
+    <main class="wiki-container">
+        <h1>Antivoid Tech</h1>
+
+        <div class="wiki-categories">
+            <span class="wiki-cat">Physics Engine</span>
+            <span class="wiki-cat">Tech</span>
+            <span class="wiki-cat">Displacement</span>
+        </div>
+
+        <nav class="wiki-breadcrumb">
+            <a href="../../index.html">Home</a> &gt; <a href="../techmanifest.html">TechManifest</a> &gt; <span>Antivoid</span>
+        </nav>
+
+        <div class="wiki-last-edited">Last edited on 26 Jul 2026</div>
+
+        <p>
+            <strong>Antivoid Tech</strong> (also known as <strong>Root Displacement / RD Tech</strong>) grants a <strong>noclip</strong> effect and virtual damage immunity to affected structures without automatically transferring to separate assemblies.
+        </p>
+
+        <nav class="toc-box">
+            <div class="toc-title">Contents</div>
+            <ul>
+                <li><a href="#overview">1 Overview & Mechanics</a></li>
+                <li><a href="#assembly-rules">2 Assembly Isolation & Motor Locking</a></li>
+                <li><a href="#anchorfling">3 Anchorfling Requirements</a></li>
+                <li><a href="#variants">4 Tech Types & Advanced Variants</a></li>
+            </ul>
+        </nav>
+
+        <!-- SECTION 1 -->
+        <section id="overview">
+            <h2>1. Overview & Mechanics</h2>
+            <p>
+                All Antivoid methods involve flinging in some capacity (typically displacing an anchor around <strong>10,000 studs</strong>).
+            </p>
+            <ul>
+                <li><strong>Damage Resistance:</strong> Affected assemblies generally take no external damage.</li>
+                <li><strong>Surge Variance:</strong> Generates variable surge ranging from minor 1-block position shifts to larger jitter, though typically milder than Void Tech surge.</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section id="assembly-rules">
+            <h2>2. Assembly Isolation & Motor Locking</h2>
+            <p>
+                Unlike standard physical states, Antivoid is strictly localized:
+            </p>
+            <ul>
+                <li><strong>Detachment / Unlocking:</strong> When a new assembly is created (e.g., unlocking a motor joint), the AV state <em>does not transfer</em> to the new assembly.</li>
+                <li><strong>Re-locking:</strong> Locking the motor back merges the physics tree, transferring the AV state back across the structure.</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section id="anchorfling">
+            <h2>3. Anchorfling Requirements</h2>
+            <p>A basic anchorfling setup relies on Motor1 connectors (utilizing <code>HingeConstraints</code>):</p>
+            <ul>
+                <li><strong>Motor1 Settings:</strong> Lock enabled, Powered, Toggle (optional), set to Maximum Speed and Torque.</li>
+                <li><strong>Disconnect Trigger:</strong> A mechanism to fling part of a constraint so the anchor continuously gains/loses distance.</li>
+                <li><strong>Anchor Block:</strong> Flung approximately 10k studs away from spawn.</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section id="variants">
+            <h2>4. Tech Types & Advanced Variants</h2>
+            <ul>
+                <li><strong>Anchor Charge & Anchor Fling:</strong> Storing/releasing constraint momentum.</li>
+                <li><strong>Remote Build (10k studs):</strong> Positioning core modules far from spawn to bypass spatial checks.</li>
+                <li><strong>Bancore (Advanced RD):</strong> An advanced variant that <em>does transfer across constraints</em> while retaining noclip properties.</li>
+                <li><strong>Dimensional Tech:</strong> A related high-tier displacement method known to grant noclip.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer id="wiki-footer"></footer>
+    <script src="../../js/skidunited.js"></script>
+
+</body>
+
+</html>
