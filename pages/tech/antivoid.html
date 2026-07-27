@@ -13,11 +13,11 @@
     <div id="wiki-nav"></div>
 
     <main class="wiki-container">
-        <h1>Antivoid Tech</h1>
+        <h1>Antivoid Tech (Root Displacement)</h1>
 
         <div class="wiki-categories">
-            <span class="wiki-cat">Physics Engine</span>
-            <span class="wiki-cat">Tech</span>
+            <span class="wiki-cat">Roblox Engine Mechanics</span>
+            <span class="wiki-cat">Rootpart Tech</span>
             <span class="wiki-cat">Displacement</span>
         </div>
 
@@ -25,65 +25,107 @@
             <a href="../../index.html">Home</a> &gt; <a href="../techmanifest.html">TechManifest</a> &gt; <span>Antivoid</span>
         </nav>
 
-        <div class="wiki-last-edited">Last edited on 26 Jul 2026</div>
+        <div class="wiki-last-edited">Last edited on 27 Jul 2026</div>
 
         <p>
-            <strong>Antivoid Tech</strong> (also known as <strong>Root Displacement / RD Tech</strong>) grants a <strong>noclip</strong> effect and virtual damage immunity to affected structures without automatically transferring to separate assemblies.
+            <strong>Antivoid Tech</strong> (commonly referred to as <strong>Root Displacement / RD Tech</strong>) is a high-tier physics mechanic in the Roblox engine. It allows a build to pass through all solid geometry (noclip) and gain virtual damage immunity across the main assembly.
         </p>
+
+        <div class="callout callout-info">
+            <strong>Related Noclip Mechanics:</strong> Other specialized rootpart technologies also grant noclip characteristics, including <a href="#variants">Bancore</a> (an advanced RD variant with constraint transfer properties) and <strong>Dimensional Tech</strong>.
+        </div>
 
         <nav class="toc-box">
             <div class="toc-title">Contents</div>
             <ul>
-                <li><a href="#overview">1 Overview & Mechanics</a></li>
-                <li><a href="#assembly-rules">2 Assembly Isolation & Motor Locking</a></li>
-                <li><a href="#anchorfling">3 Anchorfling Requirements</a></li>
-                <li><a href="#variants">4 Tech Types & Advanced Variants</a></li>
+                <li>
+                    <a href="#effects">1. Effects</a>
+                    <ul>
+                        <li><a href="#axis-lock">1.1 Axis Lock</a></li>
+                        <li><a href="#noclip">1.2 Noclip</a></li>
+                        <li><a href="#surge">1.3 Surge</a></li>
+                    </ul>
+                </li>
+                <li><a href="#module-types">2. Module Types</a></li>
+                <li><a href="#limitations">3. Assembly Isolation & Limitations</a></li>
+                <li><a href="#variants">4. Variants & Related Tech</a></li>
             </ul>
         </nav>
 
-        <!-- SECTION 1 -->
-        <section id="overview">
-            <h2>1. Overview & Mechanics</h2>
+        <!-- SECTION 1: EFFECTS -->
+        <section id="effects">
+            <h2>1. Effects</h2>
             <p>
-                All Antivoid methods involve flinging in some capacity (typically displacing an anchor around <strong>10,000 studs</strong>).
+                The primary effects of Antivoid depend on the exact module configuration used. Different setups produce varying degrees of positional lock, clip ability, and rotational displacement.
+            </p>
+
+            <h3 id="axis-lock">1.1 Axis Lock</h3>
+            <p>
+                Axis lock becomes immediately noticeable upon activation when attempting to tilt or maneuver the build. 
             </p>
             <ul>
-                <li><strong>Damage Resistance:</strong> Affected assemblies generally take no external damage.</li>
-                <li><strong>Surge Variance:</strong> Generates variable surge ranging from minor 1-block position shifts to larger jitter, though typically milder than Void Tech surge.</li>
+                <li><strong>Module Variance:</strong> Non-anchorfling modules enforce strict directional axis locking, whereas standard Anchorfling variants do <em>not</em> provide axis lock.</li>
+                <li><strong>Orientation Offset:</strong> Upon activation, the build may tilt unexpectedly or lock at an awkward angle (e.g., tilted 90°). Equipping a <strong>Gyro</strong> block is strongly recommended to maintain steady orientation.</li>
             </ul>
-        </section>
 
-        <!-- SECTION 2 -->
-        <section id="assembly-rules">
-            <h2>2. Assembly Isolation & Motor Locking</h2>
+            <h3 id="noclip">1.2 Noclip</h3>
             <p>
-                Unlike standard physical states, Antivoid is strictly localized:
+                Noclip is the defining feature of Antivoid Tech, allowing full phase-through capabilities against terrain, boundaries, and enemy builds.
             </p>
             <ul>
-                <li><strong>Detachment / Unlocking:</strong> When a new assembly is created (e.g., unlocking a motor joint), the AV state <em>does not transfer</em> to the new assembly.</li>
-                <li><strong>Re-locking:</strong> Locking the motor back merges the physics tree, transferring the AV state back across the structure.</li>
+                <li><strong>Damage Immunity:</strong> While active, the core build takes zero collision/physical damage. <em>(Note: Ongoing testing is confirming whether individual module components take damage, though they likely share this immunity.)</em></li>
+                <li><strong>Assembly Boundaries:</strong> Noclip is strictly tied to the parent physics assembly connected directly to the module. It does not automatically pass through un-merged mechanical joints.</li>
             </ul>
-        </section>
 
-        <!-- SECTION 3 -->
-        <section id="anchorfling">
-            <h2>3. Anchorfling Requirements</h2>
-            <p>A basic anchorfling setup relies on Motor1 connectors (utilizing <code>HingeConstraints</code>):</p>
+            <h3 id="surge">1.3 Surge</h3>
+            <p>
+                Surge refers to rapid positional micro-displacements and directional updates.
+            </p>
             <ul>
-                <li><strong>Motor1 Settings:</strong> Lock enabled, Powered, Toggle (optional), set to Maximum Speed and Torque.</li>
-                <li><strong>Disconnect Trigger:</strong> A mechanism to fling part of a constraint so the anchor continuously gains/loses distance.</li>
-                <li><strong>Anchor Block:</strong> Flung approximately 10k studs away from spawn.</li>
+                <li><strong>Anchorfling vs. Standard Modules:</strong> Anchorfling modules produce no surge effects. Other Antivoid module types generate a spectrum of surge behavior, ranging from <em>Microsurge</em> to <em>Normal Surge</em> and high-frequency <em>Hyper Surge</em>.</li>
+                <li><strong>Efficiency Note:</strong> For raw, high-activation surge output, <a href="voidtech.html">Void Tech</a> is generally preferred over Antivoid setups due to its higher activation rate.</li>
             </ul>
         </section>
 
-        <!-- SECTION 4 -->
+        <!-- SECTION 2: MODULE TYPES -->
+        <section id="module-types">
+            <h2>2. Module Types</h2>
+            <p>
+                Antivoid mechanics are generated using specific structural and constraint setups:
+            </p>
+            <ul>
+                <li><strong>Anchorfling:</strong> Uses Motor1 blocks (HingeConstraints) set to maximum torque/velocity to fling an anchor ~10,000 studs away from spawn. Provides stable noclip without axis locking or surge.</li>
+                <li><strong>Anchor Charge:</strong> Storing and releasing constraint energy across locked joints to force root displacement on demand.</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 3: LIMITATIONS -->
+        <section id="limitations">
+            <h2>3. Assembly Isolation & Limitations</h2>
+            <p>
+                As detailed in <a href="#noclip">Section 1.2 (Noclip)</a>, Antivoid is strictly localized to the primary assembly directly attached to the active module.
+            </p>
+
+            <div class="callout callout-warning">
+                <strong>Assembly Behavior Rules:</strong>
+                <ul>
+                    <li><strong>No Passive Inheritance:</strong> Sub-assemblies (e.g., structures connected via an unlocked <code>Motor2</code> or unlocked <code>Motor1</code>) do <strong>not</strong> inherit the noclip effect.</li>
+                    <li><strong>Creating Assemblies:</strong> Unlocking a motor joint creates a distinct physics assembly, immediately removing the noclip effect from the newly separated parts.</li>
+                    <li><strong>Re-merging Assemblies:</strong> Re-locking the motor joint merges the physics tree back into the main root assembly, transferring the noclip effect back to those parts.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 4: VARIANTS -->
         <section id="variants">
-            <h2>4. Tech Types & Advanced Variants</h2>
+            <h2>4. Variants & Related Tech</h2>
             <ul>
-                <li><strong>Anchor Charge & Anchor Fling:</strong> Storing/releasing constraint momentum.</li>
-                <li><strong>Remote Build (10k studs):</strong> Positioning core modules far from spawn to bypass spatial checks.</li>
-                <li><strong>Bancore (Advanced RD):</strong> An advanced variant that <em>does transfer across constraints</em> while retaining noclip properties.</li>
-                <li><strong>Dimensional Tech:</strong> A related high-tier displacement method known to grant noclip.</li>
+                <li>
+                    <strong>Bancore (Advanced Root Displacement):</strong> An advanced variant of RD designed to bypass standard assembly isolation rules. Unlike base Antivoid, Bancore allows noclip properties to cross constraint boundaries.
+                </li>
+                <li>
+                    <strong>Dimensional Tech:</strong> A specialized high-tier displacement method that provides noclip. <i>(Documentation currently undergoing further testing).</i>
+                </li>
             </ul>
         </section>
 
