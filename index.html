@@ -3,35 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plane Crazy Shredder and Tech wiki</title>
+    <title>Plane Crazy Shredder and Tech Wiki</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body style="background-image: url('assests/nightsky.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <!-- nav bar FEELS AURA -->
+    <!-- Navigation Bar -->
     <div id="wiki-nav"></div>
 
     <main class="wiki-container">
         <h1>Home</h1>
-        <p>Welcome to the Shredder & Tech wiki!</p>
+        <p>Welcome to the ultimate Shredder &amp; Tech wiki! Your central resource for shredder designs, combat mechanics, and builder resources in Plane Crazy.</p>
 
+        <!-- GLOBAL NOTICE / COMMUNITY WARNING -->
+        <blockquote class="wiki-warning" style="border-left: 4px solid #ffcc00; background: rgba(255, 204, 0, 0.1); padding: 12px; margin: 20px 0;">
+            <strong>NOTICE / WARNING:</strong> The information documented across this wiki is primarily synthesized from community discussion logs, server message histories, and secondary observations. It does not originate directly from primary Roblox developers or primary engine researchers. Mechanics, underlying engine behaviors, and active exploits are subject to ongoing re-interpretation or private development.
+        </blockquote>
+
+        <!-- PRIMARY DIRECTORY CARDS -->
         <div class="card-grid">
             <div class="card">
-                <h3>Shredder hub</h3>
-                <p>A collection of information on shredders </p>
+                <h3>Shredder Hub</h3>
+                <p>A categorized index covering shredder types, armor setups, movement, and weapon systems.</p>
                 <a href="pages/shredderhub.html" style="color: var(--accent-blue); text-decoration: none;">Explore &gt;&gt;</a>
             </div>
             <div class="card">
                 <h3>Tech Manifest</h3>
-                <p>A complete manifest of known techs, and authorized leaks of techs.</p>
+                <p>A complete list of known build mechanics, glitches, and community tech releases.</p>
                 <a href="pages/techmanifest.html" style="color: var(--accent-blue); text-decoration: none;">Explore &gt;&gt;</a>
             </div>
         </div>
-            <div class="wiki-thumb thumb-inner">
-        <div class="thumb-inner">
-            <img src="assests/Amazingg.gif" alt="what">
+
+        <div class="wiki-thumb thumb-inner" style="margin: 20px 0; text-align: center;">
+            <img src="assests/Amazingg.gif" alt="Featured Tech Preview" style="max-width: 100%; height: auto;">
         </div>
-    </div>
-        
+
+        <!-- COMMUNITY CALLOUTS -->
         <div class="callout callout-tip">
             <strong>TIP:</strong> Hate all omnis.
         </div>
@@ -41,32 +47,55 @@
         </div>
 
         <div class="callout callout-important">
-            <strong>IMPORTANT:</strong> There are three roots 
+            <strong>IMPORTANT:</strong> There are three roots.
         </div>
 
         <div class="callout callout-warning">
             <strong>WARNING:</strong> Entering Xhunters palace will get you killed at night!
         </div>
+
+        <!-- FEATURED BEGINNER PAGES -->
         <h2>Featured Pages</h2>
-        <p>These two cards link to pages that are useful for beginners.</p>
+        <p>These guides cover essential concepts every builder should learn first.</p>
 
         <div class="card-grid">
             <div class="card">
-                <h3>Massless</h3>
-                <p>Information and guide for massless, something necessary for shredders to work.</p>
+                <h3>Massless &amp; Weight Tuning</h3>
+                <p>Learn how zero-weight setups and weight staging make modern shredders move and turn.</p>
                 <a href="pages/shreds/massless.html" style="color: var(--accent-blue); text-decoration: none;">Go &gt;&gt;</a>
             </div>
             <div class="card">
                 <h3>Gyro Cores</h3>
-                <p>An explanation and guide for gyro cores.</p>
+                <p>A beginner-friendly guide to building compact, single-blade gyro-controlled shredders.</p>
                 <a href="pages/shreds/gyrocore.html" style="color: var(--accent-blue); text-decoration: none;">Go &gt;&gt;</a>
             </div>
         </div>
-<h4>If there is a mistake in the wiki then contact one of the main writers. (discord id in the credits)</h4>
 
+        <!-- HIDDEN IN SOURCE (Inspect Element):
+          ========================================================================
+          HOME ENTRY ADVANCED TECHNICAL NOTES (INSPECT ELEMENT ONLY)
+          ========================================================================
+          - Architecture Overview:
+            • Core Index hierarchy routes traffic between shredder classifications (Hub) and raw exploit manifests (Manifest).
+            • Maintained by community editors. Discord IDs listed in site credits for technical corrections.
+          - Combat & Glitch Reference:
+            • Massless & Staging relies on client-server mass sync tricks to alter rotation axes.
+            • Advanced spatial exploits (Surge/NaN variants) documented on terms/tech pages.
+          ========================================================================
+        -->
+
+        <h4 style="margin-top: 30px; opacity: 0.8;">If there is a mistake on the wiki, please contact one of the main writers (Discord IDs listed in the credits page).</h4>
+
+        <!-- INSPECT ELEMENT FOOTER NOTE -->
+        <div class="inspect-element-notice" style="margin-top: 30px; padding: 15px; border: 1px dashed #444; background: #111; text-align: center;">
+            <p style="margin: 0; color: #888; font-size: 0.9em;">
+                🔍 <strong>DEVELOPER / RESEARCHER NOTE:</strong> Looking for deep engine breakdowns, technical formulas, or hidden mechanics? 
+                <br><em>Right-click &amp; select "Inspect Element" (or press Ctrl+Shift+I) to view unlisted developer comments across the wiki.</em>
+            </p>
+        </div>
     </main>
-<footer id="wiki-footer"></footer>
-<script src="js/skidunited.js"></script>
 
+    <footer id="wiki-footer"></footer>
+    <script src="js/skidunited.js"></script>
 </body>
 </html>
