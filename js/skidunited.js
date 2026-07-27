@@ -285,3 +285,20 @@ document.addEventListener('keydown', function (e) {
         typedKeys = '';
     }
 });
+
+/**
+ * Dynamic Layout Bypass Function
+ * Automatically removes forced 2-column grid alignment on specified pages.
+ */
+function applyLayoutBypass(ignoredPages = []) {
+    const currentPage = window.location.pathname.split('/').pop();
+
+    if (ignoredPages.includes(currentPage)) {
+        document.body.classList.add('no-layout-force');
+    }
+}
+
+// Add any HTML filename here where you want to bypass forced image column alignment
+document.addEventListener('DOMContentLoaded', () => {
+    applyLayoutBypass(['blades.html']);
+});
