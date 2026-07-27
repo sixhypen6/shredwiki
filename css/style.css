@@ -1786,3 +1786,44 @@ footer {
         rgba(10, 10, 15, 0.7) 100%
     );
 }
+
+/* ==========================================================================
+   WIKI SECTION GRID & BYPASS RULES
+   ========================================================================== */
+
+/* Standard 2-column layout (Text Left, Image Right) */
+.wiki-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 1.5rem;
+    align-items: start;
+    margin-bottom: 2rem;
+}
+
+.wiki-img {
+    grid-column: 2;
+    margin: 0;
+    width: 100%;
+}
+
+/* Bypass class: Strips forced layout when active */
+body.no-layout-force .wiki-section-grid {
+    display: block !important;
+}
+
+body.no-layout-force .wiki-img {
+    grid-column: auto !important;
+    float: none !important;
+    width: 100% !important;
+    margin: 1rem 0 !important;
+}
+
+/* Mobile responsive fallback */
+@media (max-width: 768px) {
+    .wiki-section-grid {
+        grid-template-columns: 1fr;
+    }
+    .wiki-img {
+        grid-column: 1;
+    }
+}
