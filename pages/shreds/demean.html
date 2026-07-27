@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demean Tech | Plane Crazy Tech Wiki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+
+    <div id="wiki-nav"></div>
+
+    <main class="wiki-container">
+        <h1>Demean Tech (Advanced Blade Noclip & Phase Drive)</h1>
+
+        <div class="wiki-categories">
+            <span class="wiki-cat">Roblox Engine Mechanics</span>
+            <span class="wiki-cat">Blade Noclip</span>
+            <span class="wiki-cat">Kinetic Phase Systems</span>
+        </div>
+
+        <nav class="wiki-breadcrumb">
+            <a href="../../index.html">Home</a> &gt; <a href="../techmanifest.html">TechManifest</a> &gt; <span>Demean Tech</span>
+        </nav>
+
+        <div class="wiki-last-edited">Last edited on 27 Jul 2026</div>
+
+        <p>
+            <strong>Demean Tech</strong> is an advanced kinetic phase exploit combining high-frequency rotational cutter cycling with ultra-high-torque Motor2 stacks. While baseline blade noclip focuses on static cutter passthrough, Demean actively forces continuous collision state refreshes to phase through heavy physical structures and enemy assemblies.
+        </p>
+
+        <nav class="toc-box">
+            <div class="toc-title">Contents</div>
+            <ul>
+                <li><a href="#cutter-cycling">1 Rotational Mechanics (2-Tick Cutter Cycling)</a></li>
+                <li><a href="#hyper-m2">2 Hyper Motor2 Stacking</a></li>
+                <li><a href="#ce-synergy">3 Cutter Enhancement (CE) Synergy</a></li>
+                <li><a href="#speed-matrix">4 Rotational Speed Reference Matrix</a></li>
+                <li><a href="#vanilla-build">5 Optimal Vanilla Architecture</a></li>
+                <li><a href="#perfect-demean">6 The "Perfect Demean" Misconception</a></li>
+            </ul>
+        </nav>
+
+        <section id="cutter-cycling">
+            <h2>1. Rotational Mechanics (2-Tick Cutter Cycling)</h2>
+            <p>
+                At the core of Demean is high-speed rotational positioning. The drive assembly spins the blade array fast enough to cycle individual cutter coordinates every 2 physics ticks (60Hz engine rate).
+            </p>
+            <div class="callout callout-info">
+                <strong>Mechanism:</strong><br>
+                By rotating the exact angular distance required to place a new cutter face into the identical spatial coordinates of the preceding cutter, the blade continuously forces collision frame updates across target hitboxes to achieve fluid phase passthrough.
+            </div>
+        </section>
+
+        <section id="hyper-m2">
+            <h2>2. Hyper Motor2 Stacking</h2>
+            <p>
+                To sustain 2-tick cycling under physical contact without torque stall, Demean setups utilize <strong>Hyper Motor2s</strong>—stacked Motor2 block configurations tuned to extreme torque limits (e.g., values scaling past <code>99,999 × 1,000,000</code>).
+            </p>
+            <p>
+                This force overrides standard constraint resistance, allowing the blades to slice through assemblies regardless of enemy mass or material density.
+            </p>
+        </section>
+
+        <section id="ce-synergy">
+            <h2>3. Cutter Enhancement (CE) Synergy</h2>
+            <p>
+                While Demean Tech primarily governs phase clipping and noclip stability, it should ideally be paired with <strong>Cutter Enhancement (CE)</strong> for maximum damage output. 
+            </p>
+            <p>
+                Running Demean rotational speeds on a tuned CE blade layout synchronizes tick-perfect collision refreshes directly with cutter hit cooldowns, yielding the highest possible hits-per-second while phasing through targets.
+            </p>
+        </section>
+
+        <section id="speed-matrix">
+            <h2>4. Rotational Speed Reference Matrix</h2>
+            <p>
+                The table below details the exact angular velocity calculations required to achieve proper rotational alignment across various blade point counts (p).
+            </p>
+
+            <p style="font-size: 0.9em; opacity: 0.85;">
+                <em>Speed Reference Formula: <strong>Speed = (60 / p) * π</strong>. Matrix calculated and verified by <strong>gup (xhunter._)</strong>.</em>
+            </p>
+
+            <div class="table-responsive">
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Blade Points (p)</th>
+                            <th>Exact Speed</th>
+                            <th>Rounded Speed</th>
+                            <th>Motor Configuration Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong> <em>(Sinusoid/Spiral)</em></td>
+                            <td>188.495559215 (60π)</td>
+                            <td><span class="wiki-stat wiki-stat-high">188.496</span></td>
+                            <td>4 Motors (47.124 each)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong> <em>(Flat Blade)</em></td>
+                            <td>94.2477796077 (30π)</td>
+                            <td><span class="wiki-stat wiki-stat-high">94.248</span></td>
+                            <td>2 Motors (47.124 each)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong> <em>(Tri-Blade)</em></td>
+                            <td>62.8318530718 (20π)</td>
+                            <td><span class="wiki-stat wiki-stat-medium">62.832</span></td>
+                            <td>2 Motors (31.416 each)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong> <em>(Cross Blade)</em></td>
+                            <td>47.1238898038 (15π)</td>
+                            <td><span class="wiki-stat wiki-stat-medium">47.124</span></td>
+                            <td>1 Motor (47.124)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td>37.6991118431 (12π)</td>
+                            <td><span class="wiki-stat wiki-stat-low">37.699</span></td>
+                            <td>1 Motor (37.699)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6</strong></td>
+                            <td>31.4159265359 (10π)</td>
+                            <td><span class="wiki-stat wiki-stat-low">31.416</span></td>
+                            <td>1 Motor (31.416)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>7</strong></td>
+                            <td>26.9279370308 ((60/7)π)</td>
+                            <td><span class="wiki-stat wiki-stat-low">26.928</span></td>
+                            <td>1 Motor (26.928)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>8</strong></td>
+                            <td>23.5619449019 (7.5π)</td>
+                            <td><span class="wiki-stat wiki-stat-low">23.562</span></td>
+                            <td>1 Motor (23.562)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="vanilla-build">
+            <h2>5. Optimal Vanilla Architecture</h2>
+            <p>
+                To maximize phasing fluidity without self-destructing or flinging the host build, legitimate vanilla Demean setups follow specific design principles:
+            </p>
+            <ul>
+                <li><strong>Airy Construction:</strong> Keeping cutter density low to minimize physical drag and prevent unwanted kinetic feedback.</li>
+                <li><strong>Dampened Blade Layering:</strong> Stacking multiple layers of dampened blades behind the Hyper Motor2 drive to absorb micro-shocks during phase passthrough.</li>
+            </ul>
+        </section>
+
+        <section id="perfect-demean">
+            <h2>6. The "Perfect Demean" Misconception</h2>
+            
+            <div class="callout callout-warning">
+                <strong>Engine Limitations & Exclusions:</strong>
+                <p>
+                    True, absolute 100% zero-resistance <em>"perfect demean"</em> is mathematically unachievable within vanilla Plane Crazy engine limits. Builds claiming total, frictionless phase passthrough typically rely on third-party scripts or client injection, which are excluded from official wiki documentation.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="wiki-footer"></footer>
+    <script src="../../js/skidunited.js"></script>
+
+</body>
+
+</html>
