@@ -145,101 +145,109 @@
 
         <div style="height: 40px;"></div>
 
-        <!-- SECTION 3: DEMEAN & CE -->
-        <section id="demean">
-            <h2>3. Demean & Cutter Enhancement (CE)</h2>
+    <!-- SECTION 3: DEMEAN & CE -->
+<section id="demean">
+    <h2>3. Demean &amp; Cutter Enhancement (CE)</h2>
 
-            <h3 id="functionality">3.1 Core Functionality</h3>
-            <p>
-                Demean boosts blade damage and clipping capability by tuning <code>MotorSpeed</code> to match the server physics simulation rate. 
-                The Roblox physics solver runs at a maximum rate of <strong>60Hz</strong> (60 updates per second).
-            </p>
-            <p>
-                To calculate the target motor speed for a 4-point cross blade, the following formula is applied:
-            </p>
-            <p style="text-align: center; font-weight: bold; font-family: monospace;">
-                (2π × 60) ÷ (360 ÷ 45) = 15π ≈ 47.124
-            </p>
-            <p>
-                For a 3-pointed "Tri-blade", the required speed is 20π (≈ 62.832). Since individual motor speeds cap at 50, achieving 20π requires a <strong>2x Demean stack</strong> (two motors chained in series, set to 31.416 each).
-            </p>
-            <ul>
-                <li><strong>Optimal MotorTorque:</strong> Extensively tested benchmark values identify <strong>0.63</strong> as the optimal torque threshold for Demean stability.</li>
-                <li><strong>Rotational Direction:</strong> Spinning blades in reverse creates an inward vacuum effect that pulls enemy assemblies toward the core, whereas forward rotation deflects targets outward.</li>
-            </ul>
+    <h3 id="functionality">3.1 Core Functionality</h3>
+    <p>
+        <a href="demean.html">Demean Mechanics</a> boost blade effectiveness and phase-clipping capability by tuning <code>MotorSpeed</code> to match the server's 60Hz physics simulation rate. 
+    </p>
+    <p>
+        Rather than directly increasing cutter block damage, this alignment forces cutter hitboxes to refresh their collision state every 2 ticks, bypassing standard physics interpolation and drastically improving clip depth.
+    </p>
+    <p>
+        To calculate the target motor speed for a 4-point cross blade (p = 4), the standard angular velocity conversion formula is applied:
+    </p>
+    
+    <div style="background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 6px; text-align: center; font-family: monospace; margin: 1rem 0;">
+        Speed = (60 / p) * &pi; &nbsp;&rarr;&nbsp; (60 / 4) * &pi; = 15&pi; &approx; 47.124
+    </div>
 
-<h3 id="speed-matrix">3.2 Rotational Speed Matrix</h3>
-            <p>
-                The table below details the exact angular velocity calculations required for Perfect Cutter Enhancement (CE) and Demean clipping across various blade point counts (p).
-            </p>
+    <p>
+        For a 3-pointed "Tri-blade" (p = 3), the target speed increases to 20&pi; (&approx; 62.832). Because standard Roblox motors cap at a max speed of 50, achieving 20&pi; requires a <strong>2x Demean stack</strong> (two motors chained sequentially in series, each set to 31.416).
+    </p>
+    
+    <ul>
+        <li><strong>Optimal MotorTorque:</strong> Benchmark testing identifies <strong>0.63</strong> as the optimal torque threshold to balance blade stability against collision inertia.</li>
+        <li><strong>Rotational Direction:</strong> Reversing blade rotation generates an inward pulling effect that draws target geometry into the cutter stack, while forward rotation deflects targets outward.</li>
+    </ul>
 
-            <p style="font-size: 0.9em; opacity: 0.85;">
-                <em>Speed Reference Formula: <strong>Speed = (60 / p) * π</strong>. Matrix calculated and verified by <strong>gup (xhunter._)</strong>.</em>
-            </p>
+    <!-- CLEARFLOAT DIV PREVENTS FLOATING LAYOUT BREAKS -->
+    <div style="clear: both;"></div>
 
-            <div class="table-responsive">
-                <table class="wiki-table">
-                    <thead>
-                        <tr>
-                            <th>Blade Points (p)</th>
-                            <th>Speed (Exact CE)</th>
-                            <th>Speed (Rounded)</th>
-                            <th>Motor Configuration Required</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>1</strong> <em>(Sinusoid/Spiral)</em></td>
-                            <td>188.495559215 (60π)</td>
-                            <td><span class="wiki-stat wiki-stat-high">188.496</span></td>
-                            <td>4 Motors (47.124 each)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>2</strong> <em>(Flat Blade)</em></td>
-                            <td>94.2477796077 (30π)</td>
-                            <td><span class="wiki-stat wiki-stat-high">94.248</span></td>
-                            <td>2 Motors (47.124 each)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>3</strong> <em>(Tri-Blade)</em></td>
-                            <td>62.8318530718 (20π)</td>
-                            <td><span class="wiki-stat wiki-stat-medium">62.832</span></td>
-                            <td>2 Motors (31.416 each)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>4</strong> <em>(Cross Blade)</em></td>
-                            <td>47.1238898038 (15π)</td>
-                            <td><span class="wiki-stat wiki-stat-medium">47.124</span></td>
-                            <td>1 Motor (47.124)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>5</strong></td>
-                            <td>37.6991118431 (12π)</td>
-                            <td><span class="wiki-stat wiki-stat-low">37.699</span></td>
-                            <td>1 Motor (37.699)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>6</strong></td>
-                            <td>31.4159265359 (10π)</td>
-                            <td><span class="wiki-stat wiki-stat-low">31.416</span></td>
-                            <td>1 Motor (31.416)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>7</strong></td>
-                            <td>26.9279370308 ((60/7)π)</td>
-                            <td><span class="wiki-stat wiki-stat-low">26.928</span></td>
-                            <td>1 Motor (26.928)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>8</strong></td>
-                            <td>23.5619449019 (7.5π)</td>
-                            <td><span class="wiki-stat wiki-stat-low">23.562</span></td>
-                            <td>1 Motor (23.562)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <h3 id="speed-matrix">3.2 Rotational Speed Matrix</h3>
+    <p>
+        The table below details the exact angular velocity calculations required for Perfect Cutter Enhancement (CE) and Demean clipping across various blade point counts (p).
+    </p>
+
+    <p style="font-size: 0.9em; opacity: 0.85;">
+        <em>Speed Reference Formula: <strong>Speed = (60 / p) * &pi;</strong>. Matrix calculated and verified by <strong>gup (xhunter._)</strong>.</em>
+    </p>
+
+    <div class="table-responsive">
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Blade Points (p)</th>
+                    <th>Speed (Exact CE)</th>
+                    <th>Speed (Rounded)</th>
+                    <th>Motor Configuration Required</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong> <em>(Sinusoid/Spiral)</em></td>
+                    <td>188.495559215 (60&pi;)</td>
+                    <td><span class="wiki-stat wiki-stat-high">188.496</span></td>
+                    <td>4 Motors (47.124 each)</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong> <em>(Flat Blade)</em></td>
+                    <td>94.2477796077 (30&pi;)</td>
+                    <td><span class="wiki-stat wiki-stat-high">94.248</span></td>
+                    <td>2 Motors (47.124 each)</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong> <em>(Tri-Blade)</em></td>
+                    <td>62.8318530718 (20&pi;)</td>
+                    <td><span class="wiki-stat wiki-stat-medium">62.832</span></td>
+                    <td>2 Motors (31.416 each)</td>
+                </tr>
+                <tr>
+                    <td><strong>4</strong> <em>(Cross Blade)</em></td>
+                    <td>47.1238898038 (15&pi;)</td>
+                    <td><span class="wiki-stat wiki-stat-medium">47.124</span></td>
+                    <td>1 Motor (47.124)</td>
+                </tr>
+                <tr>
+                    <td><strong>5</strong></td>
+                    <td>37.6991118431 (12&pi;)</td>
+                    <td><span class="wiki-stat wiki-stat-low">37.699</span></td>
+                    <td>1 Motor (37.699)</td>
+                </tr>
+                <tr>
+                    <td><strong>6</strong></td>
+                    <td>31.4159265359 (10&pi;)</td>
+                    <td><span class="wiki-stat wiki-stat-low">31.416</span></td>
+                    <td>1 Motor (31.416)</td>
+                </tr>
+                <tr>
+                    <td><strong>7</strong></td>
+                    <td>26.9279370308 ((60/7)&pi;)</td>
+                    <td><span class="wiki-stat wiki-stat-low">26.928</span></td>
+                    <td>1 Motor (26.928)</td>
+                </tr>
+                <tr>
+                    <td><strong>8</strong></td>
+                    <td>23.5619449019 (7.5&pi;)</td>
+                    <td><span class="wiki-stat wiki-stat-low">23.562</span></td>
+                    <td>1 Motor (23.562)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
     </main>
 
