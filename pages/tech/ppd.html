@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPD (Physics Priority Distribution) | Plane Crazy Tech</title>
-    <!-- 2 levels up to root css -->
+    <title>PPD (Physics Priority Distribution) | Plane Crazy Tech Wiki</title>
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 
@@ -18,20 +17,20 @@
         <h1>Physics Priority Distribution (PPD)</h1>
 
         <div class="wiki-categories">
-            <span class="wiki-cat">Physics Engine</span>
-            <span class="wiki-cat">Tech</span>
-            <span class="wiki-cat">Core Mechanics</span>
+            <span class="wiki-cat">Roblox Engine Mechanics</span>
+            <span class="wiki-cat">Physics Solver</span>
+            <span class="wiki-cat">Core Physics</span>
         </div>
 
         <nav class="wiki-breadcrumb">
             <a href="../../index.html">Home</a> &gt; <a href="../techmanifest.html">TechManifest</a> &gt; <span>PPD</span>
         </nav>
 
-        <div class="wiki-last-edited">Last edited on 26 Jul 2026</div>
+        <div class="wiki-last-edited">Last edited on 27 Jul 2026</div>
 
         <!-- INTRO PARAGRAPH -->
         <p>
-            <strong>Physics Priority Distribution (PPD)</strong> is an engine-level physics state mechanic. Most of the research on PPD was pioneered by <strong>KAMEON</strong>. It explains why certain anchor toggles trigger extreme physics anomalies while others behave normally.
+            <strong>Physics Priority Distribution (PPD)</strong> is an engine-level physics state mechanic. Most foundational research on PPD was pioneered by <strong>KAMEON</strong>. It explains why certain anchor toggles trigger extreme physics anomalies and separation surges while others behave normally.
         </p>
 
         <!-- TABLE OF CONTENTS -->
@@ -39,8 +38,8 @@
             <div class="toc-title">Contents</div>
             <ul>
                 <li><a href="#overview">1 Mechanics & Anchor States</a></li>
-                <li><a href="#binary-priority">2 Binary State Assigning (0 vs 1)</a></li>
-                <li><a href="#applications">3 Relation to Void Tech</a></li>
+                <li><a href="#binary-priority">2 Binary State Assignment (0 vs 1)</a></li>
+                <li><a href="#applications">3 Relation to Void Tech & Surge States</a></li>
             </ul>
         </nav>
 
@@ -48,39 +47,42 @@
         <section id="overview">
             <h2>1. Mechanics & Anchor States</h2>
             <p>
-                Whenever a part or assembly is unanchored or re-anchored, the engine assigns an internal solver priority value to it. 
+                Whenever a part or assembly is unanchored or re-anchored, the Roblox physics engine assigns an internal solver priority value to it. 
             </p>
             <p>
-                Because this assignment happens dynamically upon toggling anchors, anchorfling and separation modules have a chance-based activation rate depending on which priority value the engine assigns to the module during its unanchor sequence.
+                Because this assignment happens dynamically upon toggling anchors, anchorfling and separation modules exhibit a chance-based activation rate. Success depends entirely on which priority value the engine allocates to the module during its unanchor sequence.
             </p>
         </section>
 
         <!-- SECTION 2: BINARY PRIORITY STATES -->
         <section id="binary-priority">
-            <h2>2. Binary State Assigning (0 vs 1)</h2>
+            <h2>2. Binary State Assignment (0 vs 1)</h2>
             <p>
-                In simplified terms, the state assignment operates like a binary value (<code>0</code> or <code>1</code>):
+                In simplified technical terms, the priority assignment operates like a binary state value (<code>0</code> or <code>1</code>):
             </p>
 
-            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+            <ul>
                 <li>
-                    <strong>Normal State:</strong> Standard solver behavior where physics updates and positional constraints behave deterministically on both server and client.
+                    <strong>Normal State (0):</strong> Standard solver behavior where physics updates and positional constraints behave deterministically across both server and client.
                 </li>
                 <li>
-                    <strong>Bugged Physics State:</strong> An anomalous priority state where constraint calculations produce erratic velocities, desynced server-client interpolation, or forced separation across anchor blocks.
+                    <strong>Bugged Physics State (1):</strong> An anomalous priority state where constraint calculations produce erratic velocities, desynced server-client interpolation, or forced physical separation across anchor blocks.
                 </li>
             </ul>
 
-            <div class="callout callout-note">
-                <strong>CREDIT:</strong> Research on anchor priority assignment and state distribution credit goes to <strong>KAMEON</strong>.
+            <div class="callout callout-info">
+                <strong>CREDIT:</strong> Research on anchor priority assignment and state distribution is credited to <strong>KAMEON</strong>.
             </div>
         </section>
 
         <!-- SECTION 3: VOID TECH APPLICATIONS -->
         <section id="applications">
-            <h2>3. Relation to Void Tech</h2>
+            <h2>3. Relation to Void Tech & Surge States</h2>
             <p>
-                PPD is the underlying engine cause for why <a href="voidtech.html">Void Tech</a> modules sometimes fail or succeed upon spawning or charging. Getting assigned the bugged priority state during an anchorfling is what causes the build to separate across constraints and enter a surge state.
+                PPD is the primary engine-level cause behind why <a href="voidtech.html">Void Tech</a> modules succeed or fail upon spawning or charging. 
+            </p>
+            <p>
+                Receiving the bugged priority state during an anchorfling sequence forces the build assembly to separate across constraint joints, initiating a high-velocity physics surge.
             </p>
         </section>
 
