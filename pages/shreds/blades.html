@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blades | Plane Crazy Shredders </title>
+    <title>Blades | Plane Crazy Shredders</title>
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
-    <!-- nav bar FEELS AURA -->
+
     <div id="wiki-nav"></div>
+
     <main class="wiki-container">
 
         <h1>Blades</h1>
@@ -20,145 +21,224 @@
         </div>
 
         <nav class="wiki-breadcrumb">
-            <a href="/">Home</a> <a href="https://sixhypen6.github.io/shredwiki/pages/shredderhub.html">ShredderHub</a> <span>Blades</span>
+            <a href="../../index.html">Home</a> &gt; <a href="../shredderhub.html">ShredderHub</a> &gt; <span>Blades</span>
         </nav>
 
-        <p>Blades and their design influence how much damage your shredder can output. Blades have a few factors
-            for being good, mainly spacing and CE. This page has information on many things related to blades.</p>
+        <p>
+            Blades and their physical design heavily dictate a shredder's overall damage output and clipping capabilities.
+            Key performance factors include spacing, cutter layout, and Cutter Enhancement (CE) / Demean alignment.
+        </p>
+
         <nav class="toc-box">
             <div class="toc-title">Contents</div>
             <ul>
                 <li>
-                    <a href="#design">1 Blade Design</a>
+                    <a href="#blade-design">1 Blade Design</a>
                     <ul>
-                        <li><a href="#Hover-engines">1.1 Modern Blades</a></li>
-                        <li><a href="#Rocket-engines">1.2 Sinusoid</a></li>
-                        <li><a href="#Angled-Rockets">1.3 Density</a></li>
-                        <li><a href="#Angled-Rockets">1.4 Efficiency</a></li>
-                        <li><a href="#Angled-Rockets">1.5 Surface Area</a></li>
+                        <li><a href="#modern-blades">1.1 Modern Blades</a></li>
+                        <li><a href="#sinusoid">1.2 Sinusoid & Spirals</a></li>
+                        <li><a href="#density">1.3 Density & Efficiency</a></li>
                     </ul>
                 </li>
-                <li><a href="#Acceleration">2 Cutter Rules</a></li>
-                <ul>
-                    <li><a href="#Hover-engines">1.1 Density</a></li>
-                    <li><a href="#Rocket-engines">1.2 Minimum Speed</a></li>
-                    <li><a href="#Rocket-engines">1.3 Damage per Second</a></li>
-                    <li><a href="#Angled-Rockets">1.4 Pingspiking</a></li>
-                </ul>
-                <li><a href="#Skybounce">3 Demean</a></li>
-                <ul>
-                    <li><a href="#Hover-engines">1.1 Values</a></li>
-                    <li><a href="#Rocket-engines">1.2 Functionality</a></li>
-                </ul>
+                <li>
+                    <a href="#cutter-rules">2 Cutter Rules</a>
+                    <ul>
+                        <li><a href="#minimum-distance">2.1 Minimum Distance</a></li>
+                        <li><a href="#maximum-speed">2.2 Speed Limits & Ping</a></li>
+                        <li><a href="#dps">2.3 Damage Per Second & Cooldowns</a></li>
+                        <li><a href="#pingspiking">2.4 Pingspiking</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#demean">3 Demean & Cutter Enhancement (CE)</a>
+                    <ul>
+                        <li><a href="#functionality">3.1 Core Functionality</a></li>
+                        <li><a href="#speed-matrix">3.2 Rotational Speed Matrix</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
-        <section id="skelop"></section>
-        <h2>Blade Design</h2>
-        <p>Blade design is the general design of a shredders blade, the pattern and logic. The principles of blade design are density, efficiency, and area coverage. Following these will produce a better blade.</p>
-        <h3>Modern Blades</h3>
-        <div class="wiki-thumb thumb-right">
-            <div class="thumb-inner">
-                <img src="../../assests/spacedcs.png" alt="a">
-                <div class="thumb-caption">
-                    Example.
+
+        <!-- SECTION 1: BLADE DESIGN -->
+        <section id="blade-design">
+            <h2>1. Blade Design</h2>
+            <p>
+                Blade design refers to the structural arrangement, geometry, and placement logic of cutter modules on a shredder.
+                The foundational metrics of effective blade design are density, block efficiency, and total area coverage.
+            </p>
+
+            <h3 id="modern-blades">1.1 Modern Blades</h3>
+            <div class="wiki-thumb thumb-right">
+                <div class="thumb-inner">
+                    <img src="../../assests/spacedcs.png" alt="Spaced Cross Blade Example">
+                    <div class="thumb-caption">Cross Blade configuration.</div>
                 </div>
             </div>
-        </div>
-        <p>This blade design uses the invincibility of compressor blocks and outwards compression setting to make a vertically and horizontally spaced cross blade. This is the best general design of blade for now, preferred for its high area coverage and block efficiency.</p>
-        <p>There are a few variants, most simply cut down the sides of the blade shape from four to three or two. Two
-            sided blades, flat blades, do not cover as much area as other blades and have less hits per second.</p>
-            
-        <div style="height: 20px;"></div>
-        <h3>Sinusoid</h3>
-        <div class="wiki-thumb thumb-right">
-            <div class="thumb-inner">
-                <img src="../../assests/sinusoid.png" alt="a">
-                <div class="thumb-caption">
-                    Sinusoid Blade.
+            <p>
+                Modern blade architecture utilizes compressor block invincibility and outward compression settings to form a 
+                vertically and horizontally spaced cross blade. This represents the current general meta standard due to its high area coverage 
+                and block efficiency.
+            </p>
+            <p>
+                Common variants prune side geometry from four-point layouts down to three or two points. Flat (2-point) blades trade 
+                overall hit area for reduced motor load, but deliver lower hit-rate frequency compared to full cross blades.
+            </p>
+
+            <h3 id="sinusoid">1.2 Sinusoid & Spirals</h3>
+            <div class="wiki-thumb thumb-right">
+                <div class="thumb-inner">
+                    <img src="../../assests/sinusoid.png" alt="Sinusoid Blade Example">
+                    <div class="thumb-caption">Sinusoid / Spiral Blade.</div>
                 </div>
             </div>
-        </div>
-        <p>This blade uses a repeated pattern of angles to create a spinning sinusoid. These are spaced well, but do not use cutters as efficiently.</p>
-        <p>A mistake people make when using this type of blade is creating a helix, stacking the pattern to make two
-            sinusoids. This uses way too many blocks and can make the blade dense enough to be pingspiked.</p>
-        
-        <h3>Density</h3>
-        <p></p>
-        <h3>Efficiency</h3>
-        <p></p>
-        <h3>Area Coverage</h3>
-        <p></p>
+            <p>
+                Single-pointed blades ($1$-point) perform exceptionally poorly when used in isolation due to minimal sweep area and lack of rotational symmetry. 
+                To compensate, $1$-point designs are constructed into continuous angular loops to form <strong>Sinusoids or Spirals</strong>.
+            </p>
+            <p>
+                While sinusoid patterns provide excellent physical spacing along the rotor axis, they utilize cutter blocks less efficiently than cross setups.
+                A common design flaw is stacking these patterns into double-helix structures; this drastically over-allocates block count, causing high local density that triggers self-pingspiking.
+            </p>
 
-        <div style="height: 80px;"></div>
+            <h3 id="density">1.3 Density & Efficiency</h3>
+            <p>
+                Balancing blade density is critical for avoiding collision-locking. Overly dense blade arrays increase local physical interactions, leading to severe ping degradation and reduced phase effectiveness.
+            </p>
+        </section>
 
-        <h2>Cutter Rules</h2>
+        <div style="height: 40px;"></div>
 
+        <!-- SECTION 2: CUTTER RULES -->
+        <section id="cutter-rules">
+            <h2>2. Cutter Rules</h2>
+            <p>Cutter blocks operate under specific engine limitations, involving both scripted combat rules and server physics checks.</p>
 
-        <p>Cutter blocks follow a set of rules, both scripted and naturally occouring.</p>
+            <h3 id="minimum-distance">2.1 Minimum Distance</h3>
+            <p>Cutters enforce a minimum spatial clearance rule to prevent redundant overlapping and side-by-side cutter stacking.</p>
 
+            <h3 id="maximum-speed">2.2 Speed Limits & Ping</h3>
+            <p>
+                Cutters exhibit upper limits on operational speed. As rotational velocity increases, server-side and client-side hitboxes displace further out of sync. 
+                Because damage checks evaluate on the server, network latency (ping) directly dictates hit register accuracy. At extreme speeds exceeding thousands of Studs Per Second (SPS), cutter hitboxes fail to calculate entirely.
+            </p>
 
-        <h3>Minimum Distance</h3>
+            <h3 id="dps">2.3 Damage Per Second & Cooldowns</h3>
+            <p>
+                Upon registering a hit, a cutter block enters a <strong>0.1-second internal cooldown</strong>. This cooldown prevents a single cutter from dealing infinite frame-by-frame damage or instantly overloading the server thread.
+            </p>
+            <p>
+                <strong>Demean</strong> bypasses this limitation by forcing rotation to align precisely with server physics ticks (60Hz). By rotating the exact angular distance required to place a new cutter face into the identical spatial coordinates of the preceding cutter, the blade maintains uninterrupted maximum hits-per-second.
+            </p>
+            <blockquote>
+                <strong>Example:</strong> A Flat Blade ($15\text{ hits/sec}$) achieves half the damage output of a 4-point Cross Blade ($30\text{ hits/sec}$) when running on $15\pi$ ($47.124$) Demean configurations.
+            </blockquote>
 
+            <h3 id="pingspiking">2.4 Pingspiking</h3>
+            <p>
+                When cutter arrays register simultaneous hits across dense target assemblies, network packet processing can spike indefinitely. 
+                This desynchronizes client-to-server replication, leaving the shredder stationary on the server while mobile on the client—often leading to instantaneous destruction.
+            </p>
+        </section>
 
-        <p>Cutters have a minimum distance rule, this prevents redundant cutters and side by side cutters.</p>
+        <div style="height: 40px;"></div>
 
+        <!-- SECTION 3: DEMEAN & CE -->
+        <section id="demean">
+            <h2>3. Demean & Cutter Enhancement (CE)</h2>
 
-        <h3>Maximum Speed</h3>
+            <h3 id="functionality">3.1 Core Functionality</h3>
+            <p>
+                Demean boosts blade damage and clipping capability by tuning <code>MotorSpeed</code> to match the server physics simulation rate. 
+                The Roblox physics solver runs at a maximum rate of <strong>60Hz</strong> (60 updates per second).
+            </p>
+            <p>
+                To calculate the target motor speed for a 4-point cross blade, the following formula is applied:
+            </p>
+            <p style="text-align: center; font-weight: bold; font-family: monospace;">
+                (2π × 60) ÷ (360 ÷ 45) = 15π ≈ 47.124
+            </p>
+            <p>
+                For a 3-pointed "Tri-blade", the required speed is $20\pi$ ($\approx 62.832$). Since individual motor speeds cap at $50$, achieving $20\pi$ requires a <strong>2x Demean stack</strong> (two motors chained in series, set to $31.416$ each).
+            </p>
+            <ul>
+                <li><strong>Optimal MotorTorque:</strong> Extensively tested benchmark values identify <strong>0.63</strong> as the optimal torque threshold for Demean stability.</li>
+                <li><strong>Rotational Direction:</strong> Spinning blades in reverse creates an inward vacuum effect that pulls enemy assemblies toward the core, whereas forward rotation deflects targets outward.</li>
+            </ul>
 
+            <h3 id="speed-matrix">3.2 Rotational Speed Matrix</h3>
+            <p>
+                The table below details the exact angular velocity calculations required for Perfect Cutter Enhancement (CE) and Demean clipping across various blade point counts ($p$).
+            </p>
 
-        <p>Cutters have limits to the speed where they can still function. The first cause of this is ping, this is from the serverside and clientside hitbox being more and more offset the higher the speed is.
-        This, combined with serverside damage checks for cutters, makes ping heavily determine the effectiveness of cutters.
-        </p>
-        <p>The second cause is a speed limit, cutters eventually stop working at thousands of SPS.</p>
+            <p style="font-size: 0.9em; opacity: 0.85;">
+                <em>Speed Reference Formula: $\text{Speed} = \left(\frac{60}{p}\right)\pi$. Matrix calculated and verified by <strong>gup (xhunter._)</strong>.</em>
+            </p>
 
-
-        <h3>Damage per Second</h3>
-
-
-        <p>When a cutter deals damage, it deactivates for 0.1 seconds. This prevents cutters from just dealing infinite damage and instantly pingspiking.
-            Demean makes blades have constant hits per second by making the cutters land in the same exact spot while the blade spins (Each frame the blade must rotate in a way that a cutter goes to the same position as the previous cutter.)
-            With 1 motor demean, the blade will spin <span class="wiki-stat-number">45°</span> per tick.
-            The DPS of a blade depends on the shape and demean settings.</p>
-
-        <h4>Example: a Flat Blade <span class="wiki-stat-number">(15 h/s)</span> has half the DPS of a Cross Blade <span class="wiki-stat-number">(30 h/s)</span> when using <span class="wiki-stat-number">15π</span> demean.</h4>
-
-
-
-        <h3>Pingspiking</h3>
-
-
-        <p>When your cutters interact with an excessive amount of blocks, affected by density of blade and target, your ping can spike up with no limit.
-            This causes you to freeze on the server but not your client, making your position stop replicating. This can lead to certain death.</p>
-
-
-
-
-
-        <h2>Demean</h2>
-        <p>Demean is a method of boosting the damage of cutters in a blade. This is done through a calculated MotorSpeed that aligns a specific amount of motor rotation with ingame ticks.
-            The exact rotation needed for a blade is calculated through a few steps.</p>
-
-            <h4>Roblox operates with the <a href = https://create.roblox.com/docs/physics>roblox.com/docs/physics</a> engine running at a maximum of <span class="wiki-keyword-glow">60hz</span> (like frames per second) making the optimal fps, FPS ≥ 60.
-            This also increases the value of <a href = ../../shreds/optimisation.html>Optimisation</a></h4>
-
-            <h4>To find the correct MotorSpeed for a 4 sided blade, this equation is used <span class="wiki-stat-number">(2π×60)÷(360÷45)</span>. meaning demean is <span class="wiki-stat-number">15π</span> or <span class="wiki-stat-number">47.124</span>.</h4>
-
-            <h4>To find the MotorSpeed for a 3 sided "tri blade", the equation <span class="wiki-stat-number">(2π×60)÷(360÷60)</span> is used. The answer, <span class="wiki-stat-number">20π</span>, cannot fit within a singular motor. The MotorSpeed limit is 50, 20π is <span class="wiki-stat-number">~62.832</span>.
-                The fix to this is 2x Demean, which stacks the speed of two motors. This means the correct value for the motors, divided across the 2 motors, is <span class="wiki-stat-number">31.416</span>.</h4>
-            
-            <h4>The optimal MotorTorque value for blades, tested over 1000 times with demean, is <span class="wiki-stat-number">0.63</span>.</h4>
-
-            <h4>To have a better effect, spin backwards to make it capable of pulling targets into itself. Forwards will have a reversed effect.</h4>
-
-            <p>In summary, a cross blade</p>
-        <h3>Values</h3>
-        <p></p>
-        <h3>Functionality</h3>
-        <p></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Blade Points (p)</th>
+                        <th>Speed (Exact CE)</th>
+                        <th>Speed (Rounded)</th>
+                        <th>Motor Configuration Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1</strong> <em>(Sinusoid/Spiral)</em></td>
+                        <td>188.495559215 ($60\pi$)</td>
+                        <td>188.496</td>
+                        <td>4 Motors ($47.124$ each)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong> <em>(Flat Blade)</em></td>
+                        <td>94.2477796077 ($30\pi$)</td>
+                        <td>94.248</td>
+                        <td>2 Motors ($47.124$ each)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong> <em>(Tri-Blade)</em></td>
+                        <td>62.8318530718 ($20\pi$)</td>
+                        <td>62.832</td>
+                        <td>2 Motors ($31.416$ each)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4</strong> <em>(Cross Blade)</em></td>
+                        <td>47.1238898038 ($15\pi$)</td>
+                        <td>47.124</td>
+                        <td>1 Motor ($47.124$)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5</strong></td>
+                        <td>37.6991118431 ($12\pi$)</td>
+                        <td>37.699</td>
+                        <td>1 Motor ($37.699$)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6</strong></td>
+                        <td>31.4159265359 ($10\pi$)</td>
+                        <td>31.416</td>
+                        <td>1 Motor ($31.416$)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7</strong></td>
+                        <td>26.9279370308 ($\frac{60}{7}\pi$)</td>
+                        <td>26.928</td>
+                        <td>1 Motor ($26.928$)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8</strong></td>
+                        <td>23.5619449019 ($7.5\pi$)</td>
+                        <td>23.562</td>
+                        <td>1 Motor ($23.562$)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
     </main>
-    <footer id="wiki-footer"></footer>
 
+    <footer id="wiki-footer"></footer>
     <script src="../../js/skidunited.js"></script>
 
 </body>
