@@ -92,8 +92,8 @@
                 </div>
             </div>
             <p>
-                Single-pointed blades ($1$-point) perform exceptionally poorly when used in isolation due to minimal sweep area and lack of rotational symmetry. 
-                To compensate, $1$-point designs are constructed into continuous angular loops to form <strong>Sinusoids or Spirals</strong>.
+                Single-pointed blades (1-point) perform exceptionally poorly when used in isolation due to minimal sweep area and lack of rotational symmetry. 
+                To compensate, 1-point designs are constructed into continuous angular loops to form <strong>Sinusoids or Spirals</strong>.
             </p>
             <p>
                 While sinusoid patterns provide excellent physical spacing along the rotor axis, they utilize cutter blocks less efficiently than cross setups.
@@ -130,7 +130,7 @@
                 <strong>Demean</strong> bypasses this limitation by forcing rotation to align precisely with server physics ticks (60Hz). By rotating the exact angular distance required to place a new cutter face into the identical spatial coordinates of the preceding cutter, the blade maintains uninterrupted maximum hits-per-second.
             </p>
             <blockquote>
-                <strong>Example:</strong> A Flat Blade ($15\text{ hits/sec}$) achieves half the damage output of a 4-point Cross Blade ($30\text{ hits/sec}$) when running on $15\pi$ ($47.124$) Demean configurations.
+                <strong>Example:</strong> A Flat Blade (15 hits/sec) achieves half the damage output of a 4-point Cross Blade (30 hits/sec) when running on 15π (47.124) Demean configurations.
             </blockquote>
 
             <h3 id="pingspiking">2.4 Pingspiking</h3>
@@ -158,7 +158,7 @@
                 (2π × 60) ÷ (360 ÷ 45) = 15π ≈ 47.124
             </p>
             <p>
-                For a 3-pointed "Tri-blade", the required speed is $20\pi$ ($\approx 62.832$). Since individual motor speeds cap at $50$, achieving $20\pi$ requires a <strong>2x Demean stack</strong> (two motors chained in series, set to $31.416$ each).
+                For a 3-pointed "Tri-blade", the required speed is 20π (≈ 62.832). Since individual motor speeds cap at 50, achieving 20π requires a <strong>2x Demean stack</strong> (two motors chained in series, set to 31.416 each).
             </p>
             <ul>
                 <li><strong>Optimal MotorTorque:</strong> Extensively tested benchmark values identify <strong>0.63</strong> as the optimal torque threshold for Demean stability.</li>
@@ -174,66 +174,68 @@
                 <em>Speed Reference Formula: $\text{Speed} = \left(\frac{60}{p}\right)\pi$. Matrix calculated and verified by <strong>gup (xhunter._)</strong>.</em>
             </p>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Blade Points (p)</th>
-                        <th>Speed (Exact CE)</th>
-                        <th>Speed (Rounded)</th>
-                        <th>Motor Configuration Required</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1</strong> <em>(Sinusoid/Spiral)</em></td>
-                        <td>188.495559215 ($60\pi$)</td>
-                        <td>188.496</td>
-                        <td>4 Motors ($47.124$ each)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2</strong> <em>(Flat Blade)</em></td>
-                        <td>94.2477796077 ($30\pi$)</td>
-                        <td>94.248</td>
-                        <td>2 Motors ($47.124$ each)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3</strong> <em>(Tri-Blade)</em></td>
-                        <td>62.8318530718 ($20\pi$)</td>
-                        <td>62.832</td>
-                        <td>2 Motors ($31.416$ each)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>4</strong> <em>(Cross Blade)</em></td>
-                        <td>47.1238898038 ($15\pi$)</td>
-                        <td>47.124</td>
-                        <td>1 Motor ($47.124$)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>5</strong></td>
-                        <td>37.6991118431 ($12\pi$)</td>
-                        <td>37.699</td>
-                        <td>1 Motor ($37.699$)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>6</strong></td>
-                        <td>31.4159265359 ($10\pi$)</td>
-                        <td>31.416</td>
-                        <td>1 Motor ($31.416$)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>7</strong></td>
-                        <td>26.9279370308 ($\frac{60}{7}\pi$)</td>
-                        <td>26.928</td>
-                        <td>1 Motor ($26.928$)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>8</strong></td>
-                        <td>23.5619449019 ($7.5\pi$)</td>
-                        <td>23.562</td>
-                        <td>1 Motor ($23.562$)</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Blade Points (p)</th>
+                            <th>Speed (Exact CE)</th>
+                            <th>Speed (Rounded)</th>
+                            <th>Motor Configuration Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong> <em>(Sinusoid/Spiral)</em></td>
+                            <td>188.495559215 (60π)</td>
+                            <td><span class="wiki-stat wiki-stat-high">188.496</span></td>
+                            <td>4 Motors (47.124 each)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong> <em>(Flat Blade)</em></td>
+                            <td>94.2477796077 (30π)</td>
+                            <td><span class="wiki-stat wiki-stat-high">94.248</span></td>
+                            <td>2 Motors (47.124 each)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong> <em>(Tri-Blade)</em></td>
+                            <td>62.8318530718 (20π)</td>
+                            <td><span class="wiki-stat wiki-stat-medium">62.832</span></td>
+                            <td>2 Motors (31.416 each)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong> <em>(Cross Blade)</em></td>
+                            <td>47.1238898038 (15π)</td>
+                            <td><span class="wiki-stat wiki-stat-medium">47.124</span></td>
+                            <td>1 Motor (47.124)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td>37.6991118431 (12π)</td>
+                            <td><span class="wiki-stat wiki-stat-low">37.699</span></td>
+                            <td>1 Motor (37.699)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6</strong></td>
+                            <td>31.4159265359 (10π)</td>
+                            <td><span class="wiki-stat wiki-stat-low">31.416</span></td>
+                            <td>1 Motor (31.416)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>7</strong></td>
+                            <td>26.9279370308 ((60/7)π)</td>
+                            <td><span class="wiki-stat wiki-stat-low">26.928</span></td>
+                            <td>1 Motor (26.928)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>8</strong></td>
+                            <td>23.5619449019 (7.5π)</td>
+                            <td><span class="wiki-stat wiki-stat-low">23.562</span></td>
+                            <td>1 Motor (23.562)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
     </main>
