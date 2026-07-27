@@ -145,40 +145,50 @@
 
         <div style="height: 40px;"></div>
 
-    <!-- SECTION 3: DEMEAN & CE -->
+<!-- SECTION 3: DEMEAN & CUTTER ENHANCEMENT (CE) -->
 <section id="demean">
     <h2>3. Demean &amp; Cutter Enhancement (CE)</h2>
 
     <h3 id="functionality">3.1 Core Functionality</h3>
     <p>
-        <a href="demean.html">Demean Mechanics</a> boost blade effectiveness and phase-clipping capability by tuning <code>MotorSpeed</code> to match the server's 60Hz physics simulation rate. 
+        While frequently grouped together, <a href="../tech/demean.html">Demean</a> and <strong>Cutter Enhancement (CE)</strong> govern entirely separate physical interactions within the Roblox constraint solver:
     </p>
+    <ul>
+        <li>
+            <strong>Demean Mechanics:</strong> Focuses on recoil suppression, force dampening, and structural rigidity. Demean operates <em>independently of motor speed or blade rotation</em>—phase-clipping can occur even at 0 speed. While basic, erratic clipping can be forced using extreme torque or unlocked motor states, true Demean eliminates recoil response to allow seamless pass-through without relying on torque force.
+        </li>
+        <li>
+            <strong>Cutter Enhancement (CE):</strong> Specifically tunes blade rotational velocity (<code>MotorSpeed</code>) relative to blade geometry to align cutter block sweeps with the server's 60Hz physics ticks.
+        </li>
+    </ul>
+
     <p>
-        Rather than directly increasing cutter block damage, this alignment forces cutter hitboxes to refresh their collision state every 2 ticks, bypassing standard physics interpolation and drastically improving clip depth.
-    </p>
-    <p>
-        To calculate the target motor speed for a 4-point cross blade (p = 4), the standard angular velocity conversion formula is applied:
+        To achieve perfect CE alignment for a given blade layout, motor speed is calculated using the blade point count (<em>p</em>):
     </p>
     
-    <div style="background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 6px; text-align: center; font-family: monospace; margin: 1rem 0;">
+    <div style="background: rgba(0, 0, 0, 0.3); padding: 0.75rem; border-radius: 6px; text-align: center; font-family: monospace; margin: 1rem 0;">
         Speed = (60 / p) * &pi; &nbsp;&rarr;&nbsp; (60 / 4) * &pi; = 15&pi; &approx; 47.124
     </div>
 
     <p>
-        For a 3-pointed "Tri-blade" (p = 3), the target speed increases to 20&pi; (&approx; 62.832). Because standard Roblox motors cap at a max speed of 50, achieving 20&pi; requires a <strong>2x Demean stack</strong> (two motors chained sequentially in series, each set to 31.416).
+        For a 3-pointed "Tri-blade" (<em>p</em> = 3), the required speed is 20&pi; (&approx; 62.832). Because individual motor speed caps at 50, reaching 20&pi; requires a <strong>2x motor stack</strong> (two motors chained sequentially in series, each set to 31.416).
     </p>
     
     <ul>
-        <li><strong>Optimal MotorTorque:</strong> Benchmark testing identifies <strong>0.63</strong> as the optimal torque threshold to balance blade stability against collision inertia.</li>
-        <li><strong>Rotational Direction:</strong> Reversing blade rotation generates an inward pulling effect that draws target geometry into the cutter stack, while forward rotation deflects targets outward.</li>
+        <li>
+            <strong>Motor1 Torque &amp; Fling Thresholds:</strong> Over-allocating torque to blade Motor1s generates aggressive constraint feedback on collision, resulting in severe flinging. Benchmarking confirms <strong>0.63 MotorTorque</strong> as the ideal value for Motor1s to prevent flinging while maintaining rotational speed. Primary torque force should strictly originate from the internal core assembly.
+        </li>
+        <li>
+            <strong>Rotational Direction:</strong> Reversing rotation generates an inward vacuum effect that draws target geometry into the blade array, whereas forward rotation deflects targets outward.
+        </li>
     </ul>
 
     <!-- CLEARFLOAT DIV PREVENTS FLOATING LAYOUT BREAKS -->
     <div style="clear: both;"></div>
 
-    <h3 id="speed-matrix">3.2 Rotational Speed Matrix</h3>
+    <h3 id="speed-matrix">3.2 Rotational Speed Matrix (CE)</h3>
     <p>
-        The table below details the exact angular velocity calculations required for Perfect Cutter Enhancement (CE) and Demean clipping across various blade point counts (p).
+        The table below details the exact angular velocity calculations required for Perfect Cutter Enhancement (CE) across various blade point counts (<em>p</em>).
     </p>
 
     <p style="font-size: 0.9em; opacity: 0.85;">
