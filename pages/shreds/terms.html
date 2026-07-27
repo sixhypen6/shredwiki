@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms &amp; Terminology | Plane Crazy Shredders</title>
+    <meta name="description" content="Standardized definitions and mechanical distinctions for Plane Crazy shredder tech, engine behavior, and common community misconceptions.">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <div id="wiki-nav"></div>
+
+    <main class="wiki-container">
+        <h1>Terms &amp; Terminology</h1>
+        <p>
+            A standardized reference index clearing up community misconceptions, historical naming shifts, and structural framework distinctions within Plane Crazy shredder engineering.
+        </p>
+
+        <!-- SECTION 1: CORE DISTINCTIONS & HISTORICAL SHIFTS -->
+        <section id="core-distinctions">
+            <h2>1. Mechanical Distinctions &amp; Terminology Shifts</h2>
+
+            <h3 id="demean-vs-ce">1.1 Demean vs. Cutter Enhancement (CE)</h3>
+            <p>
+                Much of the confusion around these terms comes from a historical shift in community slang:
+            </p>
+            <ul>
+                <li>
+                    <strong>Historical Context:</strong> "Demean" was originally the legacy term used for specific rotational speeds (47.124, 31.416, etc.). As engine theory evolved, the community adopted <strong>Cutter Enhancement (CE)</strong> to describe speed tuning, while <strong>Demean</strong> shifted to specifically mean blade clipping and recoil dampening.
+                </li>
+                <li>
+                    <strong>Cutter Enhancement (CE):</strong> Refers strictly to <em>rotational frequency alignment</em>. CE tunes blade rotational speed (<code>MotorSpeed</code>) relative to point count ($p$) using $\text{Speed} = (60 / p) \times \pi$ to sync cutter block sweeps directly with the server's 60Hz physics tick rate.
+                </li>
+                <li>
+                    <strong>2-Motor CE ("2-Motor Demean"):</strong> Because stacking two motors (e.g., two motors at 23.562 reaching the 47.124 threshold) naturally dampens constraint shock like a Damp Blade, players often mislabel this as "2-motor Demean." Technically, it is a 2-motor CE setup.
+                </li>
+                <li>
+                    <strong>Demean Mechanics:</strong> Refers strictly to <em>recoil suppression and constraint dampening</em> that enables blade clipping. It operates independently of motor speed or blade rotation—phase-clipping can occur even at 0 speed.
+                </li>
+                <li>
+                    <strong>Damp Blade:</strong> An add-on configuration designed specifically to absorb structural shock on impact, preventing severe recoil feedback from flinging the shredder core.
+                </li>
+            </ul>
+
+            <h3 id="massless-vs-antigrav">1.2 Full Massless (Desync) vs. True Anti-Gravity</h3>
+            <p>
+                A build hovering motionlessly in mid-air is often mislabeled as "Anti-Grav," but the underlying physics engine cause determines what is actually happening:
+            </p>
+            <ul>
+                <li>
+                    <strong>True Anti-Gravity (Hover Thruster Dampening):</strong> Built using <strong>Hover Thrusters</strong> set to <strong>Max Drag</strong> and <strong>0 Speed</strong> (or low speed) pointing outward in any direction. Max drag applies severe position-locking drag vectors that neutralize gravity and lock the build in 3D space.
+                </li>
+                <li>
+                    <strong>Full Massless "Hovering" (Desync Fake):</strong> Occurs when every block in an assembly is set to massless. Because the engine cannot perform proper center-of-mass calculations, the craft experiences severe client-server desync. On other players' screens, the build appears frozen or floating, but it is actually a server physics glitch, not real anti-gravity stability.
+                </li>
+            </ul>
+        </section>
+
+        <!-- SECTION 2: STRUCTURAL ARCHITECTURE -->
+        <section id="structural-frameworks">
+            <h2>2. Structural Frameworks: Skeleton vs. Exoskeleton</h2>
+            <p>
+                Understanding structural attachment methods is crucial for building survivable shredder frames that resist cutter block destruction.
+            </p>
+
+            <h3 id="skeleton">2.1 Skeleton (Base Chassis)</h3>
+            <p>
+                The <strong>Skeleton</strong> is the internal base spine or central chassis. It serves as the primary mounting hub where core components—such as motors, gyros, and drive modules—are directly attached.
+            </p>
+
+            <h3 id="exoskeleton">2.2 Exoskeleton (Invincible Weld Harness)</h3>
+            <p>
+                An <strong>Exoskeleton</strong> is an external structural harness utilizing invincible weld setups to maintain connection across disconnected or damaged blocks.
+            </p>
+            <ul>
+                <li>
+                    <strong>Without an Exoskeleton (Linear Chain):</strong> If Block A is attached to the anchor, Block B is attached to A, and Block C is attached to B—destroying Block A causes B and C to detach and fall. Destroying Block B leaves Block C stranded.
+                </li>
+                <li>
+                    <strong>With an Exoskeleton (Invincible Framework):</strong> Blocks A, B, and C are independently welded to an invincible outer harness element. If Block A or B is completely destroyed by incoming cutter damage, Block C remains welded to the harness, floating, connected, and fully operational.
+                </li>
+            </ul>
+        </section>
+
+        <!-- SECTION 3: GLOSSARY OF TERMS -->
+        <section id="glossary">
+            <h2>3. Standardized Engine Glossary</h2>
+
+            <div class="table-responsive">
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>Engine / Technical Definition</th>
+                            <th>Common Misconception</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Demean</strong></td>
+                            <td>Constraint solver dampening that enables phase-clipping and neutralizes physical recoil.</td>
+                            <td>Formerly used to describe speed numbers (47.124, etc.); now strictly refers to blade clipping/dampening.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CE (Cutter Enhancement)</strong></td>
+                            <td>Matching blade rotation speed to the 60Hz server tick rate to maximize collision updates per frame.</td>
+                            <td>Often called "Demean" due to old community terminology habits.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Damp Blade</strong></td>
+                            <td>A specialized add-on setup designed to absorb structural shock during cutter impact.</td>
+                            <td>Confused with general torque tuning or basic motor stacking.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Full Massless</strong></td>
+                            <td>Zeroing assembly mass, causing severe server desync where the build appears suspended in space.</td>
+                            <td>Mistaken for true anti-gravity stability or hover mechanics.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anti-Gravity (Anti-Grav)</strong></td>
+                            <td>Using Hover Thrusters set to Max Drag and 0 Speed to lock spatial position against gravity.</td>
+                            <td>Confused with full-massless desync builds.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Skeleton</strong></td>
+                            <td>The internal base mounting spine where functional modules attach.</td>
+                            <td>Confused with outer armor or frame trimming.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exoskeleton</strong></td>
+                            <td>An invincible weld harness that keeps blocks connected even if intermediate support blocks are destroyed.</td>
+                            <td>Confused with basic visual armor layering.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Motor1 Torque Threshold (0.63)</strong></td>
+                            <td>The ideal torque setting for Motor1s that maintains blade rotation without triggering constraint back-fling.</td>
+                            <td>Thinking higher Motor1 torque always increases cutting power.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="wiki-footer"></footer>
+    <script src="../../js/skidunited.js"></script>
+
+</body>
+
+</html>
