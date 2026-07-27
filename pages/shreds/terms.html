@@ -18,68 +18,102 @@
             A standardized reference index clearing up shredder community slang, historical naming shifts, structural framework distinctions, and combat exploit mechanics.
         </p>
 
+        <!-- GLOBAL NOTICE / COMMUNITY WARNING -->
+        <blockquote class="wiki-warning" style="border-left: 4px solid #ffcc00; background: rgba(255, 204, 0, 0.1); padding: 12px; margin: 20px 0;">
+            <strong>NOTICE / WARNING:</strong> The information documented across this technical index is primarily synthesized from community discussion logs, server message histories, and secondary observations. It does not originate directly from primary Roblox developers or primary engine researchers. Mechanics, underlying engine behaviors, and active exploits are subject to ongoing re-interpretation or private development.
+        </blockquote>
+
         <!-- SECTION 1: CORE DISTINCTIONS & HISTORICAL SHIFTS -->
         <section id="core-distinctions">
             <h2>1. Mechanical Distinctions &amp; Terminology Shifts</h2>
 
-            <h3 id="demean-vs-ce">1.1 Demean vs. Cutter Enhancement (CE)</h3>
+            <h3 id="demean-vs-ce">1.1 Cutter Enhancement (CE) vs. Demean</h3>
             <p>
                 Much of the confusion around these terms comes from a historical shift in community slang:
             </p>
             <ul>
                 <li>
-                    <strong>Historical Context:</strong> "Demean" was originally the legacy term used for specific rotational speeds (47.124, 31.416, etc.). As engine theory evolved, the community adopted <strong>Cutter Enhancement (CE)</strong> to describe speed tuning, while <strong>Demean</strong> shifted to specifically mean blade clipping and recoil dampening.
+                    <strong>Historical Context:</strong> "Demean" was originally used by the community to describe target motor speed numbers (e.g., 47.124, 31.416). As building methods evolved, the term <strong>Cutter Enhancement (CE)</strong> was adopted to describe motor speed tuning, while <strong>Demean</strong> shifted to mean blade clipping and recoil dampening.
                 </li>
                 <li>
-                    <strong>Cutter Enhancement (CE):</strong> Refers strictly to <em>rotational frequency alignment</em>. CE tunes blade rotational speed (<code>MotorSpeed</code>) relative to point count ($p$) using $\text{Speed} = (60 / p) \times \pi$ to sync cutter block sweeps directly with the server's 60Hz physics tick rate.
+                    <strong>Cutter Enhancement (CE):</strong> Refers to setting your motor speeds so your blades spin in perfect sync with the game's physics ticks, ensuring maximum damage per hit.
                 </li>
                 <li>
-                    <strong>2-Motor CE ("2-Motor Demean"):</strong> Because stacking two motors (e.g., two motors at 23.562 reaching the 47.124 threshold) naturally dampens constraint shock like a Damp Blade, players often mislabel this as "2-motor Demean." Technically, it is a 2-motor CE setup.
+                    <strong>Demean Mechanics:</strong> Refers strictly to <em>stopping recoil and absorb shocks</em>. This allows blades to pass through objects (blade clipping) without your shredder core getting flung away when you crash into another build.
                 </li>
                 <li>
-                    <strong>Demean Mechanics:</strong> Refers strictly to <em>recoil suppression and constraint dampening</em> that enables blade clipping. It operates independently of motor speed or blade rotation—phase-clipping can occur even at 0 speed.
-                </li>
-                <li>
-                    <strong>Damp Blade:</strong> An add-on configuration designed specifically to absorb structural shock on impact, preventing severe recoil feedback from flinging the shredder core.
+                    <strong>Damp Blade:</strong> An extra setup attached to your blades specifically to soak up structural shock when hitting an enemy craft.
                 </li>
             </ul>
 
+            <!-- HIDDEN IN SOURCE (Inspect Element):
+              ADVANCED CE & DEMEAN MATHEMATICS:
+              - CE Formula: Tuned via MotorSpeed relative to point count (p) using: Speed = (60 / p) * PI
+                Syncs cutter block sweeps directly with the server's 60Hz physics tick rate.
+              - 2-Motor CE ("2-Motor Demean"): Stacking two motors (e.g., two motors set to 23.562 to hit 47.124) naturally dampens constraint shock like a Damp Blade. Frequently mislabeled as "2-motor Demean" despite technically being a multi-motor CE arrangement.
+            -->
+
             <h3 id="massless-vs-antigrav">1.2 Full Massless (Desync) vs. True Anti-Gravity</h3>
             <p>
-                A build hovering motionlessly in mid-air is often mislabeled as "Anti-Grav," but the underlying physics engine cause determines what is actually happening:
+                A shredder floating motionlessly in mid-air is often mislabeled as "Anti-Grav," but different mechanics cause it:
             </p>
             <ul>
                 <li>
-                    <strong>True Anti-Gravity (Hover Thruster Dampening):</strong> Built using <strong>Hover Thrusters</strong> set to <strong>Max Drag</strong> and <strong>0 Speed</strong> (or low speed) pointing outward in any direction. Max drag applies severe position-locking drag vectors that neutralize gravity and lock the build in 3D space.
+                    <strong>Anti-Gravity / Weightless Setup:</strong> Normal builds counter gravity using <strong>Hover Thrusters</strong> set to <strong>Max Drag</strong> and <strong>0 Speed</strong>. Max drag locks your craft in 3D space, letting heavy shredders float cleanly and turn instantly without falling.
                 </li>
                 <li>
-                    <strong>Full Massless "Hovering" (Desync Fake):</strong> Occurs when every block in an assembly is set to massless. Because the engine cannot perform proper center-of-mass calculations, the craft experiences severe client-server desync. On other players' screens, the build appears frozen or floating, but it is actually a server physics glitch, not real anti-gravity stability.
+                    <strong>Full Massless (Desync Fake):</strong> Happens when every single block on a build has its weight set to zero. The game engine breaks trying to figure out where the build is, causing severe lag for other players. On their screens, your build looks like it's frozen floating in space, but it's just a server visual bug rather than real anti-gravity stability.
                 </li>
             </ul>
+
+            <h3 id="boundary-surge-nan">1.3 Boundary Tech &amp; Position Tricks (Surge &amp; NaN)</h3>
+            <p>
+                Advanced build setups can trick the game into hiding your core or freezing enemy players:
+            </p>
+            <ul>
+                <li>
+                    <strong>Surge Mechanics:</strong> A server trick where your build rapidly teleports or flickers between several spots on the map. This tricks target locks and enemy missiles into aiming at an empty spot, while you keep moving normally on your screen.
+                </li>
+                <li>
+                    <strong>NaN Tech (+NaN / -NaN):</strong> An aggressive glitch exploit using motor setups that completely breaks any enemy build on contact. Getting hit by NaN is <strong>unrecoverable</strong>—your craft stops working and your camera freezes permanently at the exact angle you were aiming when you got hit. Comes in both <code>+NaN</code> and <code>-NaN</code> versions.
+                </li>
+            </ul>
+
+            <!-- HIDDEN IN SOURCE (Inspect Element):
+              ADVANCED SURGE & ADVANCED SPATIAL EXPLOITS:
+              - Surge Scales:
+                • Microsurge: Micro-scale flickering (~1 plot / ~51 blocks wide) to shift server hitboxes without wild instability.
+                • Normal Surge: Mid-range spatial flickering across local map sectors.
+                • Hypersurge: Extreme macro-scale flickering spanning half-map, whole-map, or multi-map distances.
+              - Surgeflinging: High-frequency position jumping transfers extreme momentum vectors on collision ticks, turning flickering contact points into kinetic fling weapons.
+              - Requiem Tech: Specialized Void Tech variant integrating Surge physics directly. Allows for passive/active Surgeflinging, axis locks, or functional non-surging weaponry/blades while maintaining void benefits.
+              - Modern NaN State: While basic public NaN methods were patched, modern NaN modules still exist—leveraging specific motor constraint arrangements to force mathematical undefined state vectors (+/-NaN). Highly gatekept and actively researched by obscure groups (e.g., NaN Research Group, "the 11").
+              - True Anti-Void (FFlag Engine State): Total hitbox removal via FFlag parameters. Renders assembly immune to Screwdriver clicks and void wipes. Currently impractical/unviable due to tight single-frame activation windows.
+            -->
         </section>
 
         <!-- SECTION 2: STRUCTURAL ARCHITECTURE -->
         <section id="structural-frameworks">
             <h2>2. Structural Frameworks: Skeleton vs. Exoskeleton</h2>
             <p>
-                Understanding structural attachment methods is crucial for building survivable shredder frames that resist cutter block destruction.
+                How you wire up your blocks determines if your shredder stays together or gets torn apart in battle.
             </p>
 
-            <h3 id="skeleton">2.1 Skeleton (Base Chassis)</h3>
+            <h3 id="skeleton">2.1 Skeleton (Base Core)</h3>
             <p>
-                The <strong>Skeleton</strong> is the internal base spine or central chassis. It serves as the primary mounting hub where core components—such as motors, gyros, and drive modules—are directly attached.
+                The <strong>Skeleton</strong> is the main inner spine or core frame of your shredder. It's the central block chain where your primary parts—like motors, gyros, and thrusters—are mounted.
             </p>
 
-            <h3 id="exoskeleton">2.2 Exoskeleton (Invincible Weld Harness)</h3>
+            <h3 id="exoskeleton">2.2 Exoskeleton (Invincible Weld Frame)</h3>
             <p>
-                An <strong>Exoskeleton</strong> is an external structural harness utilizing invincible weld setups to maintain connection across disconnected or damaged blocks.
+                An <strong>Exoskeleton</strong> is a protective outer weld frame that keeps blocks connected even if the middle parts get destroyed.
             </p>
             <ul>
                 <li>
-                    <strong>Without an Exoskeleton (Linear Chain):</strong> If Block A is attached to the anchor, Block B is attached to A, and Block C is attached to B—destroying Block A causes B and C to detach and fall. Destroying Block B leaves Block C stranded.
+                    <strong>Without an Exoskeleton (Standard Chain):</strong> If Block A connects to the core, Block B connects to A, and Block C connects to B—destroying Block A will break off both B and C, causing them to fall to the ground.
                 </li>
                 <li>
-                    <strong>With an Exoskeleton (Invincible Framework):</strong> Blocks A, B, and C are independently welded to an invincible outer harness element. If Block A or B is completely destroyed by incoming cutter damage, Block C remains welded to the harness, floating, connected, and fully operational.
+                    <strong>With an Exoskeleton (Invincible Weld Frame):</strong> Blocks A, B, and C are all individually welded to an invincible outer harness block. If an enemy cutter completely destroys Block A or B, Block C stays attached to the frame, floating and fully working.
                 </li>
             </ul>
         </section>
@@ -93,55 +127,89 @@
                     <thead>
                         <tr>
                             <th>Term</th>
-                            <th>Engine / Technical Definition</th>
+                            <th>Simple Explanation / Definition</th>
                             <th>Common Misconception</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Demean</strong></td>
-                            <td>Constraint solver dampening that enables phase-clipping and neutralizes physical recoil.</td>
-                            <td>Formerly used to describe speed numbers (47.124, etc.); now strictly refers to blade clipping/dampening.</td>
+                            <td>Setting up blades to stop kickback/recoil and allow cutters to pass through objects smoothly.</td>
+                            <td>Used to refer to motor speed numbers (47.124); now strictly means blade shock dampening.</td>
                         </tr>
                         <tr>
                             <td><strong>CE (Cutter Enhancement)</strong></td>
-                            <td>Matching blade rotation speed to the 60Hz server tick rate to maximize collision updates per frame.</td>
-                            <td>Often called "Demean" due to old community terminology habits.</td>
+                            <td>Tuning motor speeds to match server frame updates for maximum cutting speed.</td>
+                            <td>Often incorrectly referred to as "Demean" due to old community habits.</td>
                         </tr>
                         <tr>
                             <td><strong>Damp Blade</strong></td>
-                            <td>A specialized add-on setup designed to absorb structural shock during cutter impact.</td>
-                            <td>Confused with general torque tuning or basic motor stacking.</td>
+                            <td>A protective add-on piece built onto cutter arms to absorb heavy shocks upon hitting an enemy build.</td>
+                            <td>Confused with basic motor torque settings.</td>
                         </tr>
                         <tr>
                             <td><strong>Full Massless</strong></td>
-                            <td>Zeroing assembly mass, causing severe server desync where the build appears suspended in space.</td>
-                            <td>Mistaken for true anti-gravity stability or hover mechanics.</td>
+                            <td>Turning off the weight of every block on a build, causing a visual lag glitch where your build freezes mid-air.</td>
+                            <td>Mistaken for true anti-gravity or real flight control.</td>
                         </tr>
                         <tr>
                             <td><strong>Anti-Gravity (Anti-Grav)</strong></td>
-                            <td>Using Hover Thrusters set to Max Drag and 0 Speed to lock spatial position against gravity.</td>
-                            <td>Confused with full-massless desync builds.</td>
+                            <td>Using Hover Thrusters set to Max Drag &amp; 0 Speed to freeze your shredder in mid-air against gravity.</td>
+                            <td>Confused with full-massless desync glitches.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Surge Mechanics</strong></td>
+                            <td>A motor setup that flickers your build back and forth to throw off enemy target locks and missiles.</td>
+                            <td>Thinking Surge lets you clip through walls (clipping is client-side; Surge strictly tricks server position).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NaN Tech (+NaN / -NaN)</strong></td>
+                            <td>An aggressive attack setup that completely breaks an enemy craft on contact, freezing their camera in place permanently.</td>
+                            <td>Believing NaN is completely patched out; modern motor/constraint versions still exist in private circles.</td>
                         </tr>
                         <tr>
                             <td><strong>Skeleton</strong></td>
-                            <td>The internal base mounting spine where functional modules attach.</td>
-                            <td>Confused with outer armor or frame trimming.</td>
+                            <td>The main internal spine or inner frame where your core parts connect.</td>
+                            <td>Confused with outer armor panels.</td>
                         </tr>
                         <tr>
                             <td><strong>Exoskeleton</strong></td>
-                            <td>An invincible weld harness that keeps blocks connected even if intermediate support blocks are destroyed.</td>
-                            <td>Confused with basic visual armor layering.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Motor1 Torque Threshold (0.63)</strong></td>
-                            <td>The ideal torque setting for Motor1s that maintains blade rotation without triggering constraint back-fling.</td>
-                            <td>Thinking higher Motor1 torque always increases cutting power.</td>
+                            <td>An invincible weld frame that keeps your functional blocks connected even if intermediate support blocks break.</td>
+                            <td>Confused with basic decorative armor layers.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <!-- HIDDEN IN SOURCE GLOSSARY (Inspect Element):
+            ========================================================================
+            ADDITIONAL TECHNICAL GLOSSARY ENTRIES (INSPECT ELEMENT ONLY)
+            ========================================================================
+            Term: Microsurge
+            Technical Definition: Micro-scale Surge variant (~1 plot / ~51 blocks wide) used to shift server hitboxes locally without wild instability.
+
+            Term: Hypersurge
+            Technical Definition: High-tier Surge variant causing rapid spatial flickering across vast distances (half-map to multi-map spans).
+
+            Term: Surgefling
+            Technical Definition: Kinetic offshoot of Surge where rapid coordinate jumping imparts massive kinetic velocity onto opposing assemblies upon contact frame evaluation.
+
+            Term: Requiem Tech
+            Technical Definition: Advanced Void Tech variant incorporating multiple custom properties (e.g., Surgefling capabilities, stable/non-surging weaponry, axis locks) into void assemblies.
+
+            Term: True Anti-Void (True AV)
+            Technical Definition: Engine FFlag state causing total hitbox removal and screwdriver immunity. Impractical in current patch cycles due to frame-tight execution windows.
+            ========================================================================
+            -->
         </section>
+
+        <!-- INSPECT ELEMENT FOOTER NOTE -->
+        <div class="inspect-element-notice" style="margin-top: 30px; padding: 15px; border: 1px dashed #444; background: #111; text-align: center;">
+            <p style="margin: 0; color: #888; font-size: 0.9em;">
+                🔍 <strong>DEVELOPER / RESEARCHER NOTE:</strong> Additional high-tier math formulas, scale classifications (Microsurge/Hypersurge), and specialized exploit sub-types (Requiem Tech, Surgeflinging) are embedded directly in the page source code. 
+                <br><em>Right-click &amp; select "Inspect Element" (or press Ctrl+Shift+I) to view unlisted technical notes.</em>
+            </p>
+        </div>
 
     </main>
 
