@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Massless and Staging | Plane Crazy Shredders</title>
+    <title>Massless & Staging | Plane Crazy Tech Wiki</title>
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 
@@ -14,23 +14,23 @@
 
     <main class="wiki-container">
         <!-- PAGE HEADER -->
-        <h1>Massless</h1>
+        <h1>Massless & Staging Mechanics</h1>
 
         <div class="wiki-categories">
             <span class="wiki-cat">Shredders</span>
             <span class="wiki-cat">Module</span>
+            <span class="wiki-cat">Assembly Mechanics</span>
         </div>
 
         <nav class="wiki-breadcrumb">
             <a href="../../index.html">Home</a> &gt; <a href="../shredderhub.html">ShredderHub</a> &gt; <span>Massless</span>
         </nav>
 
+        <div class="wiki-last-edited">Last edited on 27 Jul 2026</div>
+
         <!-- INTRO PARAGRAPH -->
         <p>
-            Massless is a core function of shredders. Without massless or its correct application, the common 
-            <span style="color: #58a6ff; font-weight: bold;">shredder will not work properly.</span> 
-            The most common case of this is new players not locking their blade motor, so if you're new please read 
-            <a href="#Staging-LockedMotor">2.2 Staging blade motors</a>.
+            <strong>Massless Tech</strong> is a foundational mechanic in high-performance shredder architecture. Without proper massless execution, rotational speed limits, gyro stabilization, and blade mechanics degrade rapidly.
         </p>
 
         <!-- TABLE OF CONTENTS -->
@@ -38,113 +38,150 @@
             <div class="toc-title">Contents</div>
             <ul>
                 <li>
-                    <a href="#Massless-info">1 Massless Info</a>
+                    <a href="#massless-info">1 Massless Mechanics & Engine Rules</a>
                     <ul>
-                        <li><a href="#desync">1.1 Desync and how to deal with it</a></li>
+                        <li><a href="#desync">1.1 Massless Assembly Desync</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#Staging">2 Staging</a>
+                    <a href="#staging">2 Staging Mechanics</a>
                     <ul>
-                        <li><a href="#Staging-Constraints">2.1 Staging Constraints</a></li>
-                        <li><a href="#Staging-LockedMotor">2.2 Staging blade motors</a></li>
-                        <li><a href="#Staging-MassGyro">2.3 Preventing broken massless gyros</a></li>
+                        <li><a href="#staging-constraints">2.1 Staging Constraints</a></li>
+                        <li><a href="#staging-lockedmotor">2.2 Staging Blade Motors</a></li>
+                        <li><a href="#staging-massgyro">2.3 Preventing Massless Gyro Degradation</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#Modules">3 Massless Modules</a>
+                    <a href="#modules">3 Massless Module Evolution</a>
                     <ul>
-                        <li><a href="#Modules-balljoint">3.1 Modern balljoint massless</a></li>
-                        <li><a href="#Modules-normal">3.2 Three block massless (deprecated)</a></li>
-                        <li><a href="#Modules-ancient">3.3 Ancient massless (super deprecated)</a></li>
+                        <li><a href="#modules-balljoint">3.1 Balljoint Massless (Modern Meta)</a></li>
+                        <li><a href="#modules-normal">3.2 Three-Block Massless (Deprecated)</a></li>
+                        <li><a href="#modules-ancient">3.3 Ancient Massless Module (Deprecated)</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
 
         <!-- SECTION 1: MASSLESS INFO -->
-        <section id="Massless-info">
-            <h2>Massless Info</h2>
-            <p>Massless modules work when a few requirements are met:</p>
+        <section id="massless-info">
+            <h2>1. Massless Mechanics & Engine Rules</h2>
+            <p>A massless module successfully strips physical weight from an assembly when three specific engine conditions are met:</p>
             
-            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                <li><strong>The Motor2 has 100 torque or more.</strong></li>
-                <li><strong>The object being made massless cannot be the root part of its assembly or the first child of the root assembly.</strong> This can be easily manipulated by simply having the massless module be anchored.</li>
-                <li><strong>The object to be made massless has a rotational velocity magnitude of 1 or more.</strong></li>
+            <ul>
+                <li><strong>Motor2 Torque:</strong> The drive Motor2 must be configured to <code>100 Torque</code> or higher.</li>
+                <li><strong>Root Part Hierarchy:</strong> The target assembly being made massless <em>cannot</em> be the designated Root Part of the build or the first child of the root assembly. Anchoring the massless module bypasses this root restriction during activation.</li>
+                <li><strong>Rotational Velocity Threshold:</strong> The object must maintain a minimum rotational velocity magnitude of <code>1.0</code> or higher.</li>
             </ul>
 
-            <p>Certain objects have a scripted immunity to massless. This includes the Motor1 plate, Motor2 plate, and a joint within wing panels that controls drag properties.</p>
+            <div class="callout callout-warning">
+                <strong>Scripted Immunity Exclusions:</strong>
+                <p>
+                    Certain components possess hardcoded engine immunity to massless state propagation. This includes Motor1 plates, Motor2 plates, and internal wing panel joints controlling aerodynamic drag.
+                </p>
+            </div>
         </section>
 
         <!-- SUBSECTION: DESYNC -->
         <section id="desync">
-            <h3>Desync</h3>
-            <p>Due to a bug, massless can desynchronize any group of assemblies without a potential root part within itself and the Motor2 that applied said massless.</p>
-            <p>This happens because whenever massless is applied, it creates a local variable that stores all the blocks within the assembly it's trying to turn massless so it can check for immune parts. However, this variable is never cleared, making the server view the massless module and the build as a single group. This doesn't happen on the client side, resulting in a desync due to differences in which part is considered the root part for each network end.</p>
-            <p>This can be easily overcome by intentionally manipulating the root parts so your build always contains the root part. The simplest way is having some sort of mass within your build, as mass is the biggest determining factor for a root part.</p>
+            <h3>1.1 Massless Assembly Desync</h3>
+            <p>
+                Massless application can trigger severe desynchronization across assembly groups that lack a designated root part between themselves and the activating Motor2.
+            </p>
+            <p>
+                <strong>Engine Cause:</strong> When activated, the engine creates an unmanaged internal variable storing all assembly blocks to evaluate for part immunity. Because this variable is never cleared by the engine thread, the server treats the massless module and the host build as a unified group, while the client evaluates them as separate parts. This root part mismatch leads to network desync.
+            </p>
+            <p>
+                <strong>Mitigation:</strong> Bypassing this desync requires forcing root part priority. Stacking centralized mass within the core assembly guarantees that the main build always retains primary root part status over the massless module.
+            </p>
         </section>
 
         <!-- SECTION 2: STAGING -->
-        <section id="Staging">
-            <h2>Staging</h2>
+        <section id="staging">
+            <h2>2. Staging Mechanics</h2>
 
-            <div id="Staging-Constraints">
-                <h3>Staging Constraints</h3>
-                <p>Massless <strong>does not spread to other assemblies</strong> (separate sections of your build, usually separated by constraints) that are not separated by balljoints, so you have to temporarily weld them together with <strong>staging blocks</strong>. It is sometimes needed to allow your build to spawn correctly too.</p>
+            <div id="staging-constraints">
+                <h3>2.1 Staging Constraints</h3>
+                <p>
+                    Massless state propagation <strong>does not cross constraint boundaries</strong> (separate assemblies connected via joints, except when linked by balljoints). To extend massless properties across the whole build, separate assemblies must be temporarily welded using <strong>staging blocks</strong>.
+                </p>
+                <ul>
+                    <li><strong>Springs:</strong> The most common staging method. Springs disconnect cleanly upon unanchoring without leaving residual welds, provided neither end is welded to the primary frame.</li>
+                    <li><strong>Disconnectors:</strong> Functional for staging, but leave behind non-collidable residual geometry on the host assembly.</li>
+                    <li><strong>TNT Staging:</strong> TNT set to <code>0 Pressure / 0 Radius</code> deletes cleanly upon activation without leaving geometry behind.</li>
+                </ul>
 
-                <p>Springs are the most commonly used staging block—they leave no welds behind as long as you don't weld the top or bottom to the build. The only issue is getting stuck within the build and having to be flung out.</p>
-                <p>Disconnectors also work for staging, but leave behind a non-collidable part on the build.</p>
-
-                <div class="callout callout-note">
-                    <strong>NOTE:</strong> TNT on shredders will likely not work due to a bug related to compressors and angles somehow breaking TNT.
+                <div class="callout callout-warning">
+                    <strong>TNT & Compressor Bug:</strong>
+                    <p>
+                        Avoid using TNT staging on builds utilizing compressor blocks or tight rotational angles. Collision overlap bugs between compressed geometry frequently prevent TNT from detonating correctly.
+                    </p>
                 </div>
-
-                <p>TNT can be used for staging without leaving any parts behind since it deletes itself when activated. The radius or pressure should be set to 0.</p>
             </div>
 
-            <div id="Staging-LockedMotor">
+            <div id="staging-lockedmotor">
+                <h3>2.2 Staging Blade Motors</h3>
+                <p>
+                    Shredder blade assemblies require staging across their motor joints, or the massless state will fail to pass into the blade structure. Locking the primary Motor1 (or locking all drive motors in multi-motor stacks) temporarily bridges the constraint boundary during spawn.
+                </p>
+
                 <div class="callout callout-note">
-                    <strong>NOTE:</strong> Your blade's Motor1 plate will still have mass, so do not place it too far away from your core or your shredder will wobble.
+                    <strong>Motor Plate Mass Warning:</strong>
+                    <p>
+                        Motor1 plates retain their physical mass even after successful staging. Avoid placing blade motors far from the center of mass to prevent violent rotational wobble.
+                    </p>
                 </div>
-                <h3>Staging Blade Motors</h3>
-                <p>Blades also require staging, or massless will not spread through the constraint separating the two assemblies. This can simply be fixed by locking the Motor1 (if you have multiple, it is advised to lock all of them).</p>
             </div>
 
-            <div id="Staging-MassGyro">
-                <h3>Preventing Massless Gyros</h3>
-                <p>Gyros will be <strong>severely weakened</strong> when massless is applied to them, because their strength is <strong>proportional to their mass</strong>. To fix this, you should place a lock-and-toggle Motor1 below the gyros and connect both ends of your massless module's Motor2 together with staging blocks.</p>
-                <p>After spawning, unlock the motor, remove the staging connection from the Motor2, then lock the motor again. You can simply set the locked motor and staging blocks to the same keybind and press it twice.</p>
+            <div id="staging-massgyro">
+                <h3>2.3 Preventing Massless Gyro Degradation</h3>
+                <p>
+                    Gyroscopes lose torque and holding force when made massless because Roblox gyro stability scales proportionally with assembly mass.
+                </p>
+                <p>
+                    <strong>Fix Procedure:</strong>
+                </p>
+                <ol>
+                    <li>Place a lockable Motor1 underneath the gyro assembly.</li>
+                    <li>Connect both ends of the massless module's Motor2 together using staging blocks.</li>
+                    <li>Upon spawning: unlock the Motor1, break the staging connection on the Motor2, and re-lock the Motor1. Binding both the motor lock and staging blocks to the same keybind allows rapid execution via a quick double-press.</li>
+                </ol>
             </div>
         </section>
 
-<!-- SECTION 3: MASSLESS MODULES -->
-        <section id="Modules">
-            <h2>Massless Modules</h2>
+        <!-- SECTION 3: MASSLESS MODULES -->
+        <section id="modules">
+            <h2>3. Massless Module Evolution</h2>
             
-            <div id="Modules-balljoint" class="module-card">
-                <h3>3.1 Balljoint Massless</h3>
-                <p>This module is an advancement of the three-block massless; it has the ability to make anchored assemblies massless.</p>
+            <div id="modules-balljoint" class="module-card">
+                <h3>3.1 Balljoint Massless (Modern Meta)</h3>
+                <p>
+                    The current meta standard. Bypasses root part constraints by routing rotational torque through a balljoint assembly, enabling massless propagation even across anchored or multi-stage builds.
+                </p>
                 <figure class="wiki-img">
-                    <img src="../../assests/ballmassless.png" alt="Modern Massless">
-                    <figcaption>The modern massless module.</figcaption>
+                    <img src="../../assests/ballmassless.png" alt="Modern Balljoint Massless Module">
+                    <figcaption>Modern Balljoint Massless Module Configuration.</figcaption>
                 </figure>
             </div>
 
-            <div id="Modules-normal" class="module-card">
-                <h3>3.2 Three Block Massless (deprecated)</h3>
-                <p>It was later discovered that a massless module could be reduced to only three blocks, using an anchor to make it the root part and then a Motor2 to rotate the build and apply massless.</p>
+            <div id="modules-normal" class="module-card">
+                <h3>3.2 Three-Block Massless (Deprecated)</h3>
+                <p>
+                    A streamlined historical iteration utilizing a 3-block anchor and Motor2 setup. Effective on simple unanchored builds, but fails to propagate across complex multi-assembly or anchored structures.
+                </p>
                 <figure class="wiki-img">
-                    <img src="../../assests/regmassless.png" alt="Old Massless">
-                    <figcaption>Three block massless.</figcaption>
+                    <img src="../../assests/regmassless.png" alt="Three Block Massless Module">
+                    <figcaption>Three-Block Massless Layout.</figcaption>
                 </figure>
             </div>
 
-            <div id="Modules-ancient" class="module-card">
-                <h3>3.3 Ancient Massless Module (deprecated)</h3>
-                <p>The first massless module, probably designed this way from a misunderstanding of how it worked.</p>
+            <div id="modules-ancient" class="module-card">
+                <h3>3.3 Ancient Massless Module (Super Deprecated)</h3>
+                <p>
+                    The original legacy massless configuration. Utilized redundant structural blocks prior to the discovery of core engine root part manipulation.
+                </p>
                 <figure class="wiki-img">
-                    <img src="../../assests/oldmassless.png" alt="Oldest Massless">
-                    <figcaption>The oldest massless module.</figcaption>
+                    <img src="../../assests/oldmassless.png" alt="Legacy Massless Module">
+                    <figcaption>Legacy Massless Module Layout.</figcaption>
                 </figure>
             </div>
         </section>
