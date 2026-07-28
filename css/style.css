@@ -1827,3 +1827,8 @@ body.no-layout-force .wiki-img {
         grid-column: 1;
     }
 }
+/* Force headers to drop below floated images from previous sections */
+.wiki-container h2 {
+    clear: both;
+    padding-top: 15px; /* Adds nice breathing room above new sections */
+}
