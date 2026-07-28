@@ -2,50 +2,134 @@
   {
     "title": "Home",
     "url": "index.html",
-    "snippet": "Main hub and home page of the Plane Crazy Shredder and Tech wiki.",
-    "tags": ["home", "main", "hub", "index"],
+    "snippet": "Main landing page for the Plane Crazy Shredder and Tech wiki.",
+    "tags": ["home", "main", "hub", "index", "start"],
     "categories": ["Main"]
   },
   {
-    "title": "ShredderHub",
+    "title": "Shredder Hub",
     "url": "pages/shredderhub.html",
-    "snippet": "Directory and overview for all shredder-related guides, modules, and mechanics.",
-    "tags": ["shredder", "hub", "guides", "directory"],
+    "snippet": "Central directory for all shredder variants, modules, armor setups, and enhancements.",
+    "tags": ["shredder", "hub", "guides", "directory", "index"],
     "categories": ["Hub"]
   },
   {
-    "title": "TechManifest",
+    "title": "Tech Manifest",
     "url": "pages/techmanifest.html",
-    "snippet": "Collection of all tech pages, void tech, and advanced mechanics.",
-    "tags": ["tech", "manifest", "void", "mechanics"],
+    "snippet": "A complete manifest of known build techs, void tech, and advanced mechanics.",
+    "tags": ["tech", "manifest", "void", "mechanics", "exploits"],
     "categories": ["Hub", "Tech"]
   },
   {
-    "title": "Massless and Staging",
-    "url": "pages/shreds/massless.html",
-    "snippet": "Core guide on massless modules, staging constraints, motor locking, and preventing gyros.",
-    "tags": ["massless", "staging", "desync", "gyros", "modules", "balljoint"],
-    "categories": ["Shredders", "Module"]
+    "title": "Terms & Slang",
+    "url": "pages/terms.html",
+    "snippet": "Standardized definitions, CE vs Demean shifts, NaN tech, and structural frameworks explained simply.",
+    "tags": ["terms", "slang", "glossary", "demean", "ce", "nan", "surge", "definitions"],
+    "categories": ["Main", "Reference"]
   },
   {
-    "title": "Axis Locks",
-    "url": "pages/shreds/axislocks.html",
-    "snippet": "Information and guides on axis locks and stabilization.",
-    "tags": ["axis", "locks", "stabilization", "shredders"],
-    "categories": ["Shredders"]
+    "title": "Known Bugs",
+    "url": "pages/shreds/bugs.html",
+    "snippet": "Current engine bugs, glitch behaviors, and physics breakdowns affecting shredders.",
+    "tags": ["bugs", "glitches", "engine", "breakdown", "important"],
+    "categories": ["Important"]
   },
   {
-    "title": "Blades",
-    "url": "pages/shreds/blades.html",
-    "snippet": "Blade designs, motor setups, and damage application.",
-    "tags": ["blades", "motors", "damage", "shredders"],
-    "categories": ["Shredders"]
+    "title": "Omnis",
+    "url": "pages/shreds/omnis.html",
+    "snippet": "Multi-arm and multi-engine shredder setups designed for flexible movement.",
+    "tags": ["omni", "omnis", "multi-arm", "shredders", "variants"],
+    "categories": ["Variants"]
+  },
+  {
+    "title": "OGs",
+    "url": "pages/shreds/ogs.html",
+    "snippet": "Classic multi-bladed drag-based shredder designs.",
+    "tags": ["og", "ogs", "drag", "classic", "variants"],
+    "categories": ["Variants"]
   },
   {
     "title": "Gyro Core",
     "url": "pages/shreds/gyrocore.html",
-    "snippet": "Understanding gyro cores, rotational stability, and torque control.",
-    "tags": ["gyro", "core", "stability", "torque"],
-    "categories": ["Shredders", "Module"]
+    "snippet": "Understanding gyro cores, rotational stability, single-blade setups, and torque control.",
+    "tags": ["gyro", "core", "stability", "torque", "variants", "modules"],
+    "categories": ["Variants", "Module"]
+  },
+  {
+    "title": "Balljoints",
+    "url": "pages/shreds/balljoint.html",
+    "snippet": "Shredder designs that utilize custom balljoint arrangements for smooth aiming.",
+    "tags": ["balljoint", "balljoints", "aiming", "variants"],
+    "categories": ["Variants"]
+  },
+  {
+    "title": "Armor Information",
+    "url": "pages/shreds/armorinfo.html",
+    "snippet": "How to protect shredder weak points and defend your core from enemy cutters.",
+    "tags": ["armor", "defense", "protection", "core", "modules"],
+    "categories": ["Module"]
+  },
+  {
+    "title": "Blades",
+    "url": "pages/shreds/blades.html",
+    "snippet": "Blade designs, cutter motor tuning, CE speeds, and dampening setups.",
+    "tags": ["blades", "motors", "damage", "cutters", "ce", "demean", "modules"],
+    "categories": ["Module"]
+  },
+  {
+    "title": "Massless and Staging",
+    "url": "pages/shreds/massless.html",
+    "snippet": "Core guide on massless weight zeroing, staging constraints, and rotation controls.",
+    "tags": ["massless", "staging", "desync", "gyros", "modules", "weight"],
+    "categories": ["Module"]
+  },
+  {
+    "title": "Axis Locks",
+    "url": "pages/shreds/axislocks.html",
+    "snippet": "Guides on locking rotation axes to give your shredder a stable base to aim from.",
+    "tags": ["axis", "locks", "stabilization", "aiming", "modules"],
+    "categories": ["Module"]
+  },
+  {
+    "title": "Movement Mechanics",
+    "url": "pages/shreds/movementmechanics.html",
+    "snippet": "General map maneuverability, thruster arrangements, and hover setups.",
+    "tags": ["movement", "thrusters", "hover", "speed", "modules"],
+    "categories": ["Module"]
+  },
+  {
+    "title": "Skeletonisation",
+    "url": "pages/shreds/skeletonisation.html",
+    "snippet": "Using invincible weld frames and exoskeletons to keep parts connected under heavy damage.",
+    "tags": ["skeleton", "exoskeleton", "welds", "invincible", "enhancement"],
+    "categories": ["Enhancement"]
+  },
+  {
+    "title": "Health",
+    "url": "pages/shreds/health.html",
+    "snippet": "How block health, material durability, and part stacking keep your shredder core alive.",
+    "tags": ["health", "durability", "stacking", "survival", "enhancement"],
+    "categories": ["Enhancement"]
+  },
+  {
+    "title": "Hyper Motor2",
+    "url": "pages/shreds/hyperm2.html",
+    "snippet": "Supercharging Motor2 responsiveness and speed using specific motor settings.",
+    "tags": ["hyper", "motor2", "m2", "tuning", "enhancement"],
+    "categories": ["Enhancement"]
+  },
+  {
+    "title": "Optimisation",
+    "url": "pages/shreds/optimisation.html",
+    "snippet": "Essential design tweaks and part reduction steps to keep FPS high and prevent lag.",
+    "tags": ["optimisation", "fps", "performance", "lag", "enhancement"],
+    "categories": ["Enhancement"]
+  },
+  {
+    "title": "Materials",
+    "url": "pages/shreds/materials.html",
+    "snippet": "How different Roblox material physical properties affect shredder weight and performance.",
+    "tags": ["materials", "fabric", "density", "friction", "enhancement"],
+    "categories": ["Enhancement"]
   }
 ]
