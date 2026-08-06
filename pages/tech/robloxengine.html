@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Engine & Physics | Plane Crazy Tech Wiki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .wiki-section {
+            clear: both;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="wiki-nav"></div>
+
+    <main class="wiki-container">
+
+        <!-- PAGE HEADER -->
+        <h1>Roblox Physics Engine Mechanics</h1>
+
+        <div class="wiki-categories">
+            <span class="wiki-cat">Physics</span>
+            <span class="wiki-cat">Engine Core</span>
+            <span class="wiki-cat">Assembly Theory</span>
+        </div>
+
+        <nav class="wiki-breadcrumb">
+            <a href="../../index.html">Home</a> &gt; <a href="../shredderhub.html">ShredderHub</a> &gt; <span>Roblox Engine</span>
+        </nav>
+
+        <div class="wiki-last-edited">Last edited on 6 Aug 2026</div>
+
+        <!-- INTRO PARAGRAPH -->
+        <p>
+            Understanding Roblox's rigid body physics pipeline is required for advanced vehicle stability, exploit mechanics, and desync prevention.
+        </p>
+
+        <!-- TABLE OF CONTENTS -->
+        <nav class="toc-box">
+            <div class="toc-title">Contents</div>
+            <ul>
+                <li>
+                    <a href="#assembly-system">1 Assembly Architecture &amp; Hierarchy</a>
+                    <ul>
+                        <li><a href="#rootpart-selection">1.1 AssemblyRootPart Selection Rules</a></li>
+                        <li><a href="#dynamic-shifts">1.2 Destruction &amp; RootPart Reassignment</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#gravity-sleep">2 Engine Gravity &amp; Physics Hibernation</a>
+                    <ul>
+                        <li><a href="#gravity-behavior">2.1 Massless vs. Gravity Calculations</a></li>
+                        <li><a href="#physics-sleep">2.2 Physics Sleep State (Hibernation)</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- SECTION 1: ASSEMBLY SYSTEM -->
+        <section id="assembly-system" class="wiki-section">
+            <h2>1. Assembly Architecture &amp; Hierarchy</h2>
+            <p>
+                An <strong>Assembly</strong> is a collection of parts connected via rigid joints (welds, motor locks, or active joints). The engine calculates physics for the entire assembly as a single rigid body.
+            </p>
+
+            <div id="rootpart-selection">
+                <h3>1.1 AssemblyRootPart Selection Rules</h3>
+                <p>
+                    Every assembly contains exactly one <code>AssemblyRootPart</code>. Roblox determines the root part dynamically using specific priority rules:
+                </p>
+                <ul>
+                    <li><strong>Mass Priority:</strong> Larger, denser, and heavier parts take priority for RootPart assignment.</li>
+                    <li><strong>Hierarchy Position:</strong> Direct children of the primary assembly root take higher assignment priority than distant branches.</li>
+                    <li><strong>Center of Physics:</strong> Thruster forces, gyro torques, and network position updates are calculated directly relative to the designated <code>AssemblyRootPart</code>.</li>
+                </ul>
+            </div>
+
+            <div id="dynamic-shifts">
+                <h3>1.2 Destruction &amp; RootPart Reassignment</h3>
+                <p>
+                    When cutter blocks destroy the block designated as the <code>AssemblyRootPart</code>, the engine instantly evaluates the remaining welded geometry and assigns a new root part. This sudden shift alters the vehicle's center of mass instantly, frequently causing control desync or rapid rotational instability.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: GRAVITY & PHYSICS SLEEP -->
+        <section id="gravity-sleep" class="wiki-section">
+            <h2>2. Engine Gravity &amp; Physics Hibernation</h2>
+
+            <div id="gravity-behavior">
+                <h3>2.1 Massless vs. Gravity Calculations</h3>
+                <p>
+                    Toggling <code>Massless = true</code> on an assembly strips its mass variable, but <strong>does not grant immunity to gravity</strong>.
+                </p>
+                <ul>
+                    <li>Gravity applies constant acceleration ($9.81 \text{ m/s}^2$) across all unanchored parts regardless of mass values.</li>
+                    <li>Massless assemblies fall at identical rates to heavy assemblies unless countered by upward thrust or aerodynamic lift.</li>
+                </ul>
+            </div>
+
+            <div id="physics-sleep">
+                <h3>2.2 Physics Sleep State (Hibernation)</h3>
+                <p>
+                    To conserve server resources, Roblox's solver puts stationary or low-velocity unanchored assemblies into a <strong>Physics Sleep</strong> state.
+                </p>
+                <ul>
+                    <li>Sleeping assemblies pause physical force, torque, and constraint updates until actived by external collision.</li>
+                    <li><strong>Prevention:</strong> Integrating a constantly active Motor2 keeps the rotational velocity magnitude above <code>1.0</code>, forcing the solver thread to keep the assembly permanently awake.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="wiki-footer"></footer>
+    <script src="../../js/skidunited.js"></script>
+
+</body>
+
+</html>
