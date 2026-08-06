@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Massless & Staging | Plane Crazy Tech Wiki</title>
     <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .wiki-section {
+            clear: both;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .module-card {
+            clear: both;
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,8 +25,9 @@
     <div id="wiki-nav"></div>
 
     <main class="wiki-container">
+
         <!-- PAGE HEADER -->
-        <h1>Massless & Staging Mechanics</h1>
+        <h1>Massless &amp; Staging Mechanics</h1>
 
         <div class="wiki-categories">
             <span class="wiki-cat">Shredders</span>
@@ -26,7 +39,7 @@
             <a href="../../index.html">Home</a> &gt; <a href="../shredderhub.html">ShredderHub</a> &gt; <span>Massless</span>
         </nav>
 
-        <div class="wiki-last-edited">Last edited on 27 Jul 2026</div>
+        <div class="wiki-last-edited">Last edited on 6 Aug 2026</div>
 
         <!-- INTRO PARAGRAPH -->
         <p>
@@ -38,15 +51,15 @@
             <div class="toc-title">Contents</div>
             <ul>
                 <li>
-                    <a href="#massless-info">1 Massless Mechanics & Engine Rules</a>
+                    <a href="#massless-info">1 Massless Mechanics &amp; Engine Rules</a>
                     <ul>
-                        <li><a href="#desync">1.1 Massless Assembly Desync</a></li>
+                        <li><a href="#desync">1.1 Massless Assembly Desync Mechanics</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#staging">2 Staging Mechanics</a>
                     <ul>
-                        <li><a href="#staging-constraints">2.1 Staging Constraints</a></li>
+                        <li><a href="#staging-constraints">2.1 Staging Constraints &amp; TNT Bypass</a></li>
                         <li><a href="#staging-lockedmotor">2.2 Staging Blade Motors</a></li>
                         <li><a href="#staging-massgyro">2.3 Preventing Massless Gyro Degradation</a></li>
                     </ul>
@@ -63,14 +76,14 @@
         </nav>
 
         <!-- SECTION 1: MASSLESS INFO -->
-        <section id="massless-info">
-            <h2>1. Massless Mechanics & Engine Rules</h2>
+        <section id="massless-info" class="wiki-section">
+            <h2>1. Massless Mechanics &amp; Engine Rules</h2>
             <p>A massless module successfully strips physical weight from an assembly when three specific engine conditions are met:</p>
             
             <ul>
                 <li><strong>Motor2 Torque:</strong> The drive Motor2 must be configured to <code>100 Torque</code> or higher.</li>
-                <li><strong>Root Part Hierarchy:</strong> The target assembly being made massless <em>cannot</em> be the designated Root Part of the build or the first child of the root assembly. Anchoring the massless module bypasses this root restriction during activation.</li>
-                <li><strong>Rotational Velocity Threshold:</strong> The object must maintain a minimum rotational velocity magnitude of <code>1.0</code> or higher.</li>
+                <li><strong>RootPart Hierarchy:</strong> The target assembly being made massless <em>cannot</em> be the designated RootPart of the build or the first child of the root assembly. Anchoring the massless module bypasses this root restriction during activation.</li>
+                <li><strong>Rotational Velocity Threshold:</strong> The object must maintain a minimum rotational velocity magnitude of <code>1.0</code> or higher (active rotation).</li>
             </ul>
 
             <div class="callout callout-warning">
@@ -82,25 +95,25 @@
         </section>
 
         <!-- SUBSECTION: DESYNC -->
-        <section id="desync">
-            <h3>1.1 Massless Assembly Desync</h3>
+        <section id="desync" class="wiki-section">
+            <h3>1.1 Massless Assembly Desync Mechanics</h3>
             <p>
                 Massless application can trigger severe desynchronization across assembly groups that lack a designated root part between themselves and the activating Motor2.
             </p>
             <p>
-                <strong>Engine Cause:</strong> When activated, the engine creates an unmanaged internal variable storing all assembly blocks to evaluate for part immunity. Because this variable is never cleared by the engine thread, the server treats the massless module and the host build as a unified group, while the client evaluates them as separate parts. This root part mismatch leads to network desync.
+                <strong>Engine Cause:</strong> When activated, the engine instantiates an internal local variable array storing all assembly blocks to evaluate for part immunity. Because this array fails to flush or clear from memory, the <strong>Server thread</strong> unifies the massless module and the host frame as a single combined group, while the <strong>Client thread</strong> calculates them separately. This RootPart mismatch results in network desync.
             </p>
             <p>
-                <strong>Mitigation:</strong> Bypassing this desync requires forcing root part priority. Stacking centralized mass within the core assembly guarantees that the main build always retains primary root part status over the massless module.
+                <strong>Mitigation &amp; RootPart Priority:</strong> Bypassing this desync requires forcing RootPart priority. Stacking centralized mass within the primary core assembly forces <code>Mass(Primary Assembly) &gt;&gt; Mass(Module)</code>, guaranteeing that the main build always retains primary RootPart status over the massless module and bypassing physics sleep issues.
             </p>
         </section>
 
         <!-- SECTION 2: STAGING -->
-        <section id="staging">
+        <section id="staging" class="wiki-section">
             <h2>2. Staging Mechanics</h2>
 
             <div id="staging-constraints">
-                <h3>2.1 Staging Constraints</h3>
+                <h3>2.1 Staging Constraints &amp; TNT Bypass</h3>
                 <p>
                     Massless state propagation <strong>does not cross constraint boundaries</strong> (separate assemblies connected via joints, except when linked by balljoints). To extend massless properties across the whole build, separate assemblies must be temporarily welded using <strong>staging blocks</strong>.
                 </p>
@@ -111,9 +124,10 @@
                 </ul>
 
                 <div class="callout callout-warning">
-                    <strong>TNT & Compressor Bug:</strong>
+                    <strong>TNT Compression Bypass:</strong>
                     <p>
-                        Avoid using TNT staging on builds utilizing compressor blocks or tight rotational angles. Collision overlap bugs between compressed geometry frequently prevent TNT from detonating correctly.
+                        Collision overlap from compressor blocks or tight angles frequently prevents TNT staging from detonating.
+                        <strong>Workaround:</strong> Weld the TNT block directly to an unpowered Motor (Motor1 or Motor2). This isolates the TNT into its own sub-assembly, bypassing the collision lock and guaranteeing detonation.
                     </p>
                 </div>
             </div>
@@ -149,7 +163,7 @@
         </section>
 
         <!-- SECTION 3: MASSLESS MODULES -->
-        <section id="modules">
+        <section id="modules" class="wiki-section">
             <h2>3. Massless Module Evolution</h2>
             
             <div id="modules-balljoint" class="module-card">
@@ -185,6 +199,7 @@
                 </figure>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->
